@@ -61,6 +61,10 @@ namespace SE1802_PRN212_Group6.ViewModels.Admin
                     ImageDialog = null;
                     Temp.Image = _select.Image;
                     Temp.Name  = _select.Name;
+                    Temp.Price = _select.Price;
+                    Temp.Description = _select.Description;
+                    Temp.Category = _select.Category;
+
                     OnPropertyChanged(nameof(Temp));
                 }
             }
