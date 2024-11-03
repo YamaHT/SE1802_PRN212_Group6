@@ -120,6 +120,12 @@ namespace SE1802_PRN212_Group6.ViewModels.Admin
                 return;
             }
 
+            if (Temp.ExpiredDate < DateOnly.FromDateTime(DateTime.Now))
+            {
+                Dialog.ShowError("The expiration date cannot be set after today.");
+                return;
+            }
+
             Temp.Image = ImageUtil.AddImage(nameof(Voucher), ImageDialog);
 
             if (Temp.TryValidate())
@@ -147,6 +153,12 @@ namespace SE1802_PRN212_Group6.ViewModels.Admin
 
         public void Update(object obj)
         {
+            if (Temp.ExpiredDate < DateOnly.FromDateTime(DateTime.Now))
+            {
+                Dialog.ShowError("The expiration date cannot be set after today.");
+                return;
+            }
+
             if (Temp.TryValidate())
             {
                 var get = _unitOfWork.VoucherRepository.GetById(Select.Id);

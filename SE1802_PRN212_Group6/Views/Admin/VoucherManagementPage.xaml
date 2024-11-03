@@ -39,6 +39,7 @@
                     <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}"/>
                     <GridViewColumn Header="Reduce(%)" DisplayMemberBinding="{Binding ReducedPercent, StringFormat='{}{0}%'}"/>
                     <GridViewColumn Header="Max Reducing" DisplayMemberBinding="{Binding MaxReducing, StringFormat='{}{0}$'}"/>
+                    <GridViewColumn Header="Quantity" DisplayMemberBinding="{Binding Quantity}"/>
                     <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Description}"/>
                     <GridViewColumn Header="Expired Date" DisplayMemberBinding="{Binding ExpiredDate}"/>
                 </GridView>
@@ -63,6 +64,9 @@
 
                     <Label Content="Max Reduceing" />
                     <TextBox Text="{Binding Temp.MaxReducing,Mode=TwoWay}" PreviewTextInput="NumericOnlyTextInput"/>
+
+                    <Label Content="Quantity" />
+                    <TextBox Text="{Binding Temp.Quantity,Mode=TwoWay}" PreviewTextInput="IntegerOnlyTextInput"/>
 
                     <Label Content="Description" />
                     <TextBox Text="{Binding Temp.Description,Mode=TwoWay}" PreviewTextInput="TextAndNumericOnlyTextInput"/>

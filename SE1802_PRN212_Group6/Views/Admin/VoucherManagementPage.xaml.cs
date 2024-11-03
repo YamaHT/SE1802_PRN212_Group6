@@ -26,6 +26,11 @@ namespace SE1802_PRN212_Group6.Views.Admin
             InitializeComponent();
             datePicker.DisplayDateStart = DateTime.Now.AddDays(1);
         }
+
+        private void IntegerOnlyTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !Regex.IsMatch(e.Text, @"^[0-9]+$");
+        }
         private void NumericOnlyTextInput(object sender, TextCompositionEventArgs e)
         {
             e.Handled = !Regex.IsMatch(e.Text, @"^[0-9.]+$");
