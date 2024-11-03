@@ -12,7 +12,7 @@ using SE1802_PRN212_Group6.Data;
 namespace SE1802_PRN212_Group6.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241103114030_A")]
+    [Migration("20241103120727_A")]
     partial class A
     {
         /// <inheritdoc />
@@ -367,8 +367,8 @@ namespace SE1802_PRN212_Group6.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<decimal>("Quantity")
-                        .HasColumnType("numeric(10, 2)");
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
 
                     b.Property<decimal>("ReducedPercent")
                         .HasColumnType("numeric(10, 2)");
