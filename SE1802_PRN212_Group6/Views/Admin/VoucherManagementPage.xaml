@@ -4,11 +4,94 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:SE1802_PRN212_Group6.Views.Admin"
+      xmlns:vm="clr-namespace:SE1802_PRN212_Group6.ViewModels.Admin"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="VoucherManagementPage">
+    <Page.DataContext>
+        <vm:VoucherManagementViewModel/>
+    </Page.DataContext>
 
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="6*"/>
+        </Grid.ColumnDefinitions>
+        <ListView x:Name="list" Grid.Column="0" ItemsSource="{Binding Vouchers}" SelectedItem="{Binding Select}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Id">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock TextAlignment="Right" Text="{Binding Id}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                    <GridViewColumn Header="Image">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image Width="40" Height="40" Source="{Binding Image, Converter={StaticResource ImageConverter}, ConverterParameter=Voucher}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}"/>
+                    <GridViewColumn Header="Reduce(%)" DisplayMemberBinding="{Binding ReducedPercent, StringFormat='{}{0}%'}"/>
+                    <GridViewColumn Header="Max Reducing" DisplayMemberBinding="{Binding MaxReducing, StringFormat='{}{0}$'}"/>
+                    <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Description}"/>
+                    <GridViewColumn Header="Expired Date" DisplayMemberBinding="{Binding ExpiredDate}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="7*"/>
+                <RowDefinition Height="3*"/>
+            </Grid.RowDefinitions>
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <StackPanel Margin="20 0">
+
+                    <Label Content="Id" />
+                    <TextBox IsReadOnly="True" Text="{Binding Select.Id, Mode=TwoWay}" />
+
+                    <Label Content="Name" />
+                    <TextBox Text="{Binding Temp.Name, Mode=TwoWay}" PreviewTextInput="TextOnlyTextInput"/>
+
+                    <Label Content="Reduced Percent" />
+                    <TextBox Text="{Binding Temp.ReducedPercent,Mode=TwoWay}" PreviewTextInput="NumericOnlyTextInput"/>
+
+                    <Label Content="Max Reduceing" />
+                    <TextBox Text="{Binding Temp.MaxReducing,Mode=TwoWay}" PreviewTextInput="NumericOnlyTextInput"/>
+
+                    <Label Content="Description" />
+                    <TextBox Text="{Binding Temp.Description,Mode=TwoWay}" PreviewTextInput="TextAndNumericOnlyTextInput"/>
+
+                    <Label Content="Expired Date" />
+                    <DatePicker Name="datePicker" SelectedDate="{Binding ExpiredDatePicker, Mode=TwoWay}" FirstDayOfWeek="Monday"/>
+
+                    <Label Content="Image" />
+                    <TextBlock Text="{Binding ImagePresentation}" />
+                    <Button Content="Choose Image" Command="{Binding ChooseImageCommand}"/>
+                    <Image Height="100" Stretch="Uniform" StretchDirection="DownOnly" Source="{Binding ImageDialog.FileName}" />
+                </StackPanel>
+            </ScrollViewer>
+            <Grid Grid.Row="1" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Button Content="Clear" Command="{Binding ClearCommand}" CommandParameter="{Binding ElementName=list}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Background="#eee" Foreground="Red"/>
+                <Button Content="Add" Command="{Binding AddCommand}" CommandParameter="{Binding ElementName=list}" Grid.Row="1" Grid.Column="0" Background="ForestGreen"/>
+                <Button Content="Update" Command="{Binding UpdateCommand}" CommandParameter="{Binding ElementName=list}" Grid.Row="1" Grid.Column="1" Background="DeepSkyBlue"/>
+                <Button Content="Delete" Command="{Binding DeleteCommand}" CommandParameter="{Binding ElementName=list}" Grid.Row="2" Grid.Column="0" Background="OrangeRed"/>
+                <Button Content="Restore" Command="{Binding RestoreCommand}" CommandParameter="{Binding ElementName=list}" Grid.Row="2" Grid.Column="1" Background="Orange"/>
+            </Grid>
+        </Grid>
     </Grid>
 </Page>
