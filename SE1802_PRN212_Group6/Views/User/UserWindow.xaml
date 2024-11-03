@@ -1,0 +1,62 @@
+﻿<Window x:Class="SE1802_PRN212_Group6.Views.User.UserWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SE1802_PRN212_Group6.Views.User"
+        mc:Ignorable="d"
+        Title="UserWindow" Height="450" Width="800">
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="9*"/>
+            </Grid.RowDefinitions>
+            <Menu Grid.Column="0" x:Name="Menu">
+                <Menu.Resources>
+                    <Style TargetType="MenuItem">
+                        <Setter Property="Height" Value="40"/>
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="VerticalContentAlignment" Value="Center"/>
+
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type MenuItem}">
+                                    <Border x:Name="Bd" 
+                          Padding="5,0,5,0" 
+                          Background="{TemplateBinding Background}" 
+                          SnapsToDevicePixels="True">
+                                        <ContentPresenter x:Name="ContentPresenter"  
+                        Content="{TemplateBinding Header}" 
+                        Margin="{TemplateBinding Padding}" 
+                        RecognizesAccessKey="True" 
+                        SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center" 
+                                       />
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsHighlighted" Value="True">
+                                            <Setter Property="Background" TargetName="Bd" Value="#9cf"/>
+                                        </Trigger>
+
+                                        <Trigger Property="IsChecked" Value="True">
+                                            <Setter Property="Background" TargetName="Bd" Value="Royalblue"/>
+                                            <Setter Property="Foreground" Value="#FFF"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Menu.Resources>
+                <MenuItem x:Name="ProductList" Header="Product List" Click="ProductList_Click" />
+                <MenuItem x:Name="TableList" Header="Table List" Click="TableList_Click"/>
+                <MenuItem x:Name="Cart" Header="My Cart" Click="Cart_Click" />
+                <MenuItem x:Name="HistoryOrder" Header="History Order" Click="HistoryOrder_Click"/>
+                <MenuItem x:Name="HistoryBooking" Header="History Booking" Click="HistoryBooking_Click" />
+            </Menu>
+            <Frame Name="MainFrame" Grid.Row="1" NavigationUIVisibility="Hidden" VerticalAlignment="Stretch"/>
+        </Grid>
+    </Grid>
+</Window>

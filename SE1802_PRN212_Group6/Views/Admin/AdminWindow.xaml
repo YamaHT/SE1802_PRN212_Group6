@@ -1,0 +1,28 @@
+﻿<Window x:Class="SE1802_PRN212_Group6.Views.Admin.AdminWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SE1802_PRN212_Group6.Views.Admin"
+        mc:Ignorable="d"
+        Title="AdminWindow" Height="450" Width="800"
+        WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="8*"/>
+        </Grid.ColumnDefinitions>
+        <Menu Grid.Column="0" x:Name="Menu">
+            <Menu.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <VirtualizingStackPanel Orientation="Vertical"/>
+                </ItemsPanelTemplate>
+            </Menu.ItemsPanel>
+            <MenuItem x:Name="EmployeeM" Header="Employee Management" Click="EmployeeM_Click"/>
+            <MenuItem x:Name="ProductM" Header="Product Management" Click="ProductM_Click"/>
+            <MenuItem x:Name="TableM" Header="Table Management" Click="TableM_Click"/>
+            <MenuItem x:Name="VoucherM" Header="Voucher Management" Click="VoucherM_Click"/>
+        </Menu>
+        <Frame Name="MainFrame" Grid.Column="1" NavigationUIVisibility="Hidden" VerticalAlignment="Stretch"/>
+    </Grid>
+</Window>
