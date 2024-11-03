@@ -79,7 +79,9 @@ namespace SE1802_PRN212_Group6.ViewModels.Admin
 
         public ProductManangementViewModel()
         {
-            //Types = Enum.GetValues(typeof(TypeEnum)).Cast<TypeEnum>().Select(x => x.ToString()).ToList();
+
+          
+            Categories = new ObservableCollection<Category>( _unitOfWork.CategoryRepository.GetAll());
             Load();
 
             ClearCommand = new RelayCommand(Clear);
@@ -92,7 +94,8 @@ namespace SE1802_PRN212_Group6.ViewModels.Admin
 
         public void Load()
         {
-            Products = new ObservableCollection<Product>(_unitOfWork.ProductRepository.GetAllWithDeleted());
+            string[] includes = ["Category"];
+            Products = new ObservableCollection<Product>(_unitOfWork.ProductRepository.GetAllWithDeleted(includes));
             ImagePresentation = "Not choose";
             ImageDialog = null;
             Temp = new();
@@ -112,7 +115,7 @@ namespace SE1802_PRN212_Group6.ViewModels.Admin
             if (Temp.TryValidate())
             {
                 _unitOfWork.ProductRepository.Add(Temp);
-                _unitOfWork.SaveChanges();
+                 _unitOfWork.SaveChanges();
                 Clear(obj);
             }
         }
