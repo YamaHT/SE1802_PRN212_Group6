@@ -12,7 +12,7 @@ using SE1802_PRN212_Group6.Data;
 namespace SE1802_PRN212_Group6.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241102151800_A")]
+    [Migration("20241103114030_A")]
     partial class A
     {
         /// <inheritdoc />
@@ -345,6 +345,9 @@ namespace SE1802_PRN212_Group6.Migrations
                         .HasMaxLength(1000)
                         .HasColumnType("nvarchar(1000)");
 
+                    b.Property<DateOnly>("ExpiredDate")
+                        .HasColumnType("date");
+
                     b.Property<string>("Image")
                         .IsRequired()
                         .HasMaxLength(255)
@@ -363,6 +366,9 @@ namespace SE1802_PRN212_Group6.Migrations
                         .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
+
+                    b.Property<decimal>("Quantity")
+                        .HasColumnType("numeric(10, 2)");
 
                     b.Property<decimal>("ReducedPercent")
                         .HasColumnType("numeric(10, 2)");
