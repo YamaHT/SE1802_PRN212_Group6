@@ -8,9 +8,12 @@ namespace SE1802_PRN212_Group6.Views.User
     /// </summary>
     public partial class UserWindow : Window
     {
-        public UserWindow()
+        private Models.User User;
+
+        public UserWindow(Models.User user)
         {
             InitializeComponent();
+            this.User = user;
         }
 
         private void MenuItemToCheck(MenuItem itemToCheck)

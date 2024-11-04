@@ -1,0 +1,39 @@
+﻿<Page x:Class="SE1802_PRN212_Group6.Views.LoginPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:SE1802_PRN212_Group6.Views"
+      xmlns:vm="clr-namespace:SE1802_PRN212_Group6.ViewModels.Login" d:DataContext="{d:DesignInstance Type=vm:LoginViewModel}"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="LoginPage" >
+    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+        <StackPanel Width="400">
+            <Label Content="SIGN IN" FontWeight="Bold" FontSize="20" HorizontalAlignment="Center"/>
+            <Label Content="Email"/>
+            <TextBox Name="Email" Text="{Binding Email}" Padding="10"/>
+            <Label Content="Password"/>
+            <PasswordBox Name="Password" Padding="10"/>
+            <Button x:Name="LoginButton" Command="{Binding LoginCommand}" CommandParameter="{Binding ElementName=Password}" Content="Login" Margin="0 10 0 0" FontSize="20" Foreground="WhiteSmoke" Background="RoyalBlue"/>
+            <Button x:Name="ChangeToRegisterButton" Command="{Binding ChangeToRegisterCommand}" Margin="0 10 0 0" HorizontalAlignment="Right" Content="Register here" Background="Transparent" BorderBrush="Transparent">
+                <Button.Style>
+                    <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="BorderBrush" Value="Transparent"/>
+                        <Setter Property="Foreground" Value="Blue"/>
+                        <Setter Property="TextBlock.TextDecorations" Value="Underline"/>
+
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Foreground" Value="DarkBlue"/>
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="BorderBrush" Value="Transparent"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+        </StackPanel>
+    </Grid>
+</Page>

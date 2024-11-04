@@ -9,5 +9,10 @@ namespace SE1802_PRN212_Group6.Repositories
         {
             return _dbContext.User.FirstOrDefault(x => x.Email == email && x.Password == password);
         }
+
+        public bool CheckEmailExisted(string email)
+        {
+            return _dbContext.User.Any(x => x.Email == email);
+        }
     }
 }

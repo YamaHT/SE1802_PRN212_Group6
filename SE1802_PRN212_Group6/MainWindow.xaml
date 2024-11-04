@@ -8,17 +8,5 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800"
         WindowStartupLocation="CenterScreen">
-    <Window.DataContext>
-        <vm:LoginViewModel/>
-    </Window.DataContext>
-    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
-        <StackPanel Width="400">
-            <Label Content="SIGN IN" FontWeight="Bold" FontSize="20" HorizontalAlignment="Center"/>
-            <Label Content="Email"/>
-            <TextBox Name="Email" Text="{Binding Email}" Padding="10"/>
-            <Label Content="Password"/>
-            <PasswordBox Name="Password" Padding="10"/>
-            <Button x:Name="LoginButton" Command="{Binding LoginCommand}" CommandParameter="{Binding ElementName=Password}" Content="Login" Margin="0 10 0 0" FontSize="20" Foreground="WhiteSmoke" Background="RoyalBlue"/>
-        </StackPanel>
-    </Grid>
+    <Frame Name="MainFrame" NavigationUIVisibility="Hidden" VerticalAlignment="Stretch"/>
 </Window>

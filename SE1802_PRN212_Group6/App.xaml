@@ -11,6 +11,11 @@
 
         <Style TargetType="ListViewItem">
             <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsDeleted}" Value="True">
+                    <Setter Property="Background" Value="Red" />
+                </DataTrigger>
+            </Style.Triggers>
         </Style>
         <Style TargetType="GridViewColumnHeader">
             <Setter Property="IsEnabled" Value="False"/>
@@ -69,6 +74,7 @@
             <Setter Property="Height" Value="40"/>
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type MenuItem}">
@@ -89,8 +95,8 @@
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsHighlighted" Value="True">
-                                <Setter Property="Background" TargetName="Bd" Value="#CCC"/>
-                                <Setter Property="BorderBrush" TargetName="Bd" Value="#CCC"/>
+                                <Setter Property="Background" TargetName="Bd" Value="#def"/>
+                                <Setter Property="BorderBrush" TargetName="Bd" Value="#def"/>
                             </Trigger>
 
                             <Trigger Property="IsChecked" Value="True">
