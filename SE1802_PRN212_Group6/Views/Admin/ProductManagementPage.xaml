@@ -26,7 +26,6 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-
                     <GridViewColumn Header="Image">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
@@ -34,14 +33,13 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-
                     <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}"/>
                     <GridViewColumn Header="Price" DisplayMemberBinding="{Binding Price}"/>
                     <GridViewColumn Header="Description" Width="140">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock TextAlignment="Left" Text="{Binding Description}" 
-                                  TextWrapping="Wrap" Width="140"/>
+                                TextWrapping="Wrap" Width="140"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
@@ -73,7 +71,6 @@
                      DisplayMemberPath="Name"
                      Text="{Binding Temp.Category.Name}"
                      SelectedItem="{Binding Temp.Category, Mode=TwoWay}" />
-
 
                     <Label Content="Image" />
                     <TextBlock Text="{Binding ImagePresentation}" />

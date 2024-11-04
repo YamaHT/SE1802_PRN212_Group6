@@ -30,7 +30,7 @@ namespace SE1802_PRN212_Group6.ViewModels.Admin
         }
 
         public ObservableCollection<Product> Products { get; set; }
-        public List<Category> Categories { get; set; }
+        public IReadOnlyList<Category> Categories { get; set; }
 
         public ICommand ClearCommand { get; set; }
         public ICommand AddCommand { get; set; }
