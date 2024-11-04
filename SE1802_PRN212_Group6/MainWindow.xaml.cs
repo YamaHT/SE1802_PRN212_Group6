@@ -1,13 +1,6 @@
-﻿using System.Text;
+﻿using SE1802_PRN212_Group6.ViewModels.Login;
+using SE1802_PRN212_Group6.Views;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace SE1802_PRN212_Group6
 {
@@ -19,6 +12,7 @@ namespace SE1802_PRN212_Group6
         public MainWindow()
         {
             InitializeComponent();
+            this.DataContext = new MainViewModel(MainFrame);
         }
     }
 }
