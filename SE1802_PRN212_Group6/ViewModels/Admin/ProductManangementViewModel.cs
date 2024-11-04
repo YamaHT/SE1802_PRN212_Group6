@@ -1,15 +1,9 @@
 ﻿using Microsoft.Win32;
 using SE1802_PRN212_Group6.Models;
-using SE1802_PRN212_Group6.Models.Enums;
 using SE1802_PRN212_Group6.Utils;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace SE1802_PRN212_Group6.ViewModels.Admin
 {
@@ -36,7 +30,7 @@ namespace SE1802_PRN212_Group6.ViewModels.Admin
         }
 
         public ObservableCollection<Product> Products { get; set; }
-        public ObservableCollection<Category> Categories { get; set; }
+        public List<Category> Categories { get; set; }
 
         public ICommand ClearCommand { get; set; }
         public ICommand AddCommand { get; set; }
@@ -60,12 +54,13 @@ namespace SE1802_PRN212_Group6.ViewModels.Admin
                     ImagePresentation = _select.Image;
                     ImageDialog = null;
                     Temp.Image = _select.Image;
-                    Temp.Name  = _select.Name;
+                    Temp.Name = _select.Name;
                     Temp.Price = _select.Price;
                     Temp.Description = _select.Description;
                     Temp.Category = _select.Category;
 
                     OnPropertyChanged(nameof(Temp));
+                    OnPropertyChanged(nameof(Temp.Category));
                 }
             }
         }
@@ -83,9 +78,7 @@ namespace SE1802_PRN212_Group6.ViewModels.Admin
 
         public ProductManangementViewModel()
         {
-
-          
-            Categories = new ObservableCollection<Category>( _unitOfWork.CategoryRepository.GetAll());
+            Categories = _unitOfWork.CategoryRepository.GetAll();
             Load();
 
             ClearCommand = new RelayCommand(Clear);
@@ -100,10 +93,10 @@ namespace SE1802_PRN212_Group6.ViewModels.Admin
         {
             string[] includes = ["Category"];
             Products = new ObservableCollection<Product>(_unitOfWork.ProductRepository.GetAllWithDeleted(includes));
-            ImagePresentation = "Not choose";
-            ImageDialog = null;
             Temp = new();
             Select = new();
+            ImagePresentation = "Not choose";
+            ImageDialog = null;
             OnPropertyChanged(nameof(Products));
         }
 
@@ -118,8 +111,9 @@ namespace SE1802_PRN212_Group6.ViewModels.Admin
             Temp.Image = ImageUtil.AddImage(nameof(Product), ImageDialog);
             if (Temp.TryValidate())
             {
+                Temp.Category = _unitOfWork.CategoryRepository.GetById(Temp.Category.Id);
                 _unitOfWork.ProductRepository.Add(Temp);
-                 _unitOfWork.SaveChanges();
+                _unitOfWork.SaveChanges();
                 Clear(obj);
             }
         }
@@ -143,8 +137,8 @@ namespace SE1802_PRN212_Group6.ViewModels.Admin
                 get.Name = Temp.Name;
                 get.Price = Temp.Price;
                 get.Description = Temp.Description;
-                get.Category = Temp.Category;
-  
+                get.Category = _unitOfWork.CategoryRepository.GetById(Temp.Category.Id);
+
                 get.Image = ImageDialog != null
                     ? ImageUtil.UpdateImage(nameof(Product), Select.Image, ImageDialog)
                     : get.Image;
