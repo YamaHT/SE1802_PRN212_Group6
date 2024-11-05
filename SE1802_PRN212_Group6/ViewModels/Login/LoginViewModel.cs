@@ -1,6 +1,7 @@
 ﻿using SE1802_PRN212_Group6.Utils;
 using SE1802_PRN212_Group6.Views.Admin;
 using SE1802_PRN212_Group6.Views.User;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -53,7 +54,7 @@ namespace SE1802_PRN212_Group6.ViewModels.Login
                 new UserWindow(user).Show();
             }
 
-            System.Windows.Application.Current.MainWindow.Close();
+            Application.Current.MainWindow.Visibility = Visibility.Hidden;
         }
 
         public void Register(object obj)

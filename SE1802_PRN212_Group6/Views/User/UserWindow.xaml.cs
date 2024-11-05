@@ -54,5 +54,10 @@ namespace SE1802_PRN212_Group6.Views.User
             MainFrame.Content = new HistoryBookingPage(User);
             MenuItemToCheck(HistoryBooking);
         }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            Application.Current.MainWindow.Visibility = Visibility.Visible;
+        }
     }
 }

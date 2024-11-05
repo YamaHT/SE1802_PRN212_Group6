@@ -109,18 +109,23 @@ namespace SE1802_PRN212_Group6.ViewModels.Admin
             {
                 _unitOfWork.TableRepository.Add(Temp);
                 _unitOfWork.SaveChanges();
+                Dialog.ShowSuccess("Add successfully");
                 Clear(obj);
             }
         }
 
         public void Delete(object obj)
         {
-            var get = _unitOfWork.TableRepository.GetById(Select.Id);
-            if (get != null)
+            if (Dialog.ShowConfirm($"Are you sure you want to delete this table? (Id: {Select.Id})"))
             {
-                _unitOfWork.TableRepository.Remove(get);
-                _unitOfWork.SaveChanges();
-                Clear(obj);
+                var get = _unitOfWork.TableRepository.GetById(Select.Id);
+                if (get != null)
+                {
+                    _unitOfWork.TableRepository.Remove(get);
+                    _unitOfWork.SaveChanges();
+                    Dialog.ShowSuccess("Delete successfully");
+                    Clear(obj);
+                }
             }
         }
 
@@ -135,9 +140,13 @@ namespace SE1802_PRN212_Group6.ViewModels.Admin
                     ? ImageUtil.UpdateImage(nameof(Table), Select.Image, ImageDialog)
                     : get.Image;
 
-                _unitOfWork.TableRepository.Update(get);
-                _unitOfWork.SaveChanges();
-                Clear(obj);
+                if (get.TryValidate())
+                {
+                    _unitOfWork.TableRepository.Update(get);
+                    _unitOfWork.SaveChanges();
+                    Dialog.ShowSuccess("Update successfully");
+                    Clear(obj);
+                }
             }
         }
 
@@ -148,6 +157,7 @@ namespace SE1802_PRN212_Group6.ViewModels.Admin
             {
                 _unitOfWork.TableRepository.Restore(get);
                 _unitOfWork.SaveChanges();
+                Dialog.ShowSuccess("Restore successfully");
                 Clear(obj);
             }
         }

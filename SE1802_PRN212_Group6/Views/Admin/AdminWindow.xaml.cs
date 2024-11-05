@@ -45,5 +45,10 @@ namespace SE1802_PRN212_Group6.Views.Admin
             MainFrame.Content = new VoucherManagementPage();
             MenuItemToCheck(VoucherM);
         }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            Application.Current.MainWindow.Visibility = Visibility.Visible;
+        }
     }
 }
