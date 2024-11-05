@@ -23,6 +23,8 @@ namespace SE1802_PRN212_Group6.Views.User
         public TableListPage()
         {
             InitializeComponent();
+            bookingDatePicker.BlackoutDates.Add(new CalendarDateRange(DateTime.MinValue, DateTime.Now.AddDays(-1)));
+
         }
     }
 }
