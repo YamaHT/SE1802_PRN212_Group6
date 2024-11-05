@@ -4,11 +4,15 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:SE1802_PRN212_Group6.Views.User"
+       xmlns:vm="clr-namespace:SE1802_PRN212_Group6.ViewModels.User"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
+      Background="White"
       Title="HistoryBookingPage">
 
+    <Page.DataContext>
+        <vm:Table_BookingViewModel/>
+    </Page.DataContext>
     <Grid>
-        
     </Grid>
 </Page>
