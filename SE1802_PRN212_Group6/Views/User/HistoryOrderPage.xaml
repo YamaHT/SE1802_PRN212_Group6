@@ -3,12 +3,102 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:SE1802_PRN212_Group6.Views.User"
+      xmlns:local="clr-namespace:SE1802_PRN212_Group6.Views.User" xmlns:user="clr-namespace:SE1802_PRN212_Group6.ViewModels.User" d:DataContext="{d:DesignInstance Type=user:HistoryOrderViewModel}"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="HistoryOrderPage">
-
+      Title="HistoryOrderPage" Background="White">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="8*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="5*"/>
+            </Grid.RowDefinitions>
+            <ListView ItemsSource="{Binding Orders}" SelectedItem="{Binding Select}">
+                <ListView.View>
+                    <GridView AllowsColumnReorder="False">
+                        <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}"/>
+                        <GridViewColumn Header="Total">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Total, Converter={StaticResource PriceConverter}}" TextAlignment="Right" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
+                        <GridViewColumn Header="ActualPayment">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding ActualPayment, Converter={StaticResource PriceConverter}}" TextAlignment="Right" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Quantity" DisplayMemberBinding="{Binding Quantity}"/>
+                        <GridViewColumn Header="RecipientName" DisplayMemberBinding="{Binding RecipientName}"/>
+                        <GridViewColumn Header="Phone" DisplayMemberBinding="{Binding Phone}"/>
+                        <GridViewColumn Header="Address" DisplayMemberBinding="{Binding Address}"/>
+                        <GridViewColumn Header="OrderDate" DisplayMemberBinding="{Binding OrderDate}"/>
+                        <GridViewColumn Header="Voucher Reduce" DisplayMemberBinding="{Binding Voucher.ReducedPercent, Converter={StaticResource PercentConverter}}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            <Label Grid.Row="1" FontSize="20" FontWeight="Bold" Background="RoyalBlue" Foreground="White" Content="Order Detail" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <ListView Grid.Row="2" ItemsSource="{Binding Select.OrderDetails}">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="Focusable" Value="false"/>
+                        <Setter Property="IsEnabled" Value="false"/>
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.View>
+                    <GridView AllowsColumnReorder="False">
+                        <GridViewColumn Header="Product Id" DisplayMemberBinding="{Binding ProductId}"/>
+                        <GridViewColumn Header="Quantity" DisplayMemberBinding="{Binding Quantity}"/>
+                        <GridViewColumn Header="Image">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Image Width="40" Height="40" Source="{Binding Product.Image, Converter={StaticResource ImageConverter}, ConverterParameter=Product}"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Product.Name}"/>
+                        <GridViewColumn Header="Price" DisplayMemberBinding="{Binding Product.Price}"/>
+                        <GridViewColumn Header="Category" DisplayMemberBinding="{Binding Product.Category.Name}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="7*"/>
+                <RowDefinition Height="3*"/>
+            </Grid.RowDefinitions>
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <StackPanel Margin="20 0">
+                    <Label Content="RecipientName" />
+                    <TextBox Text="{Binding Temp.RecipientName, Mode=TwoWay}" />
+
+                    <Label Content="Phone" />
+                    <TextBox Text="{Binding Temp.Phone, Mode=TwoWay}" />
+
+                    <Label Content="Address" />
+                    <TextBox TextWrapping="Wrap" MaxLines="5" Text="{Binding Temp.Address, Mode=TwoWay}" />
+                </StackPanel>
+            </ScrollViewer>
+            <Grid Grid.Row="1" >
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Button Content="Clear" Command="{Binding ClearCommand}" CommandParameter="{Binding ElementName=list}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Background="#eee" Foreground="Red"/>
+                <Button Content="Update" Command="{Binding UpdateCommand}" CommandParameter="{Binding ElementName=list}" Grid.Row="1" Grid.Column="1" Background="DeepSkyBlue"/>
+                <Button Content="Delete" Command="{Binding DeleteCommand}" CommandParameter="{Binding ElementName=list}" Grid.Row="2" Grid.Column="0" Background="OrangeRed"/>
+            </Grid>
+        </Grid>
     </Grid>
 </Page>

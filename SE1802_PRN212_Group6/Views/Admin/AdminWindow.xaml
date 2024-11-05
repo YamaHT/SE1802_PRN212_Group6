@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:SE1802_PRN212_Group6.Views.Admin"
         mc:Ignorable="d"
         Title="AdminWindow" Height="450" Width="800"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen" Closing="Window_Closing">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*"/>
@@ -23,6 +23,6 @@
             <MenuItem x:Name="TableM" Header="Table Management" Click="TableM_Click"/>
             <MenuItem x:Name="VoucherM" Header="Voucher Management" Click="VoucherM_Click"/>
         </Menu>
-        <Frame Name="MainFrame" Grid.Column="1" NavigationUIVisibility="Hidden" VerticalAlignment="Stretch"/>
+        <Frame Name="MainFrame" Grid.Column="1" NavigationUIVisibility="Hidden" VerticalAlignment="Stretch" />
     </Grid>
 </Window>

@@ -29,7 +29,6 @@ namespace SE1802_PRN212_Group6.Models
         [Column(TypeName = "char(10)")]
         public string? Phone { get; set; }
 
-        [Required(ErrorMessage = "User is required")]
         public virtual User? User { get; set; }
 
         public virtual Voucher? Voucher { get; set; }

@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SE1802_PRN212_Group6.Views.User"
         mc:Ignorable="d"
-        Title="UserWindow" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+        Title="UserWindow" Height="450" Width="800" WindowStartupLocation="CenterScreen"
+        Closing="Window_Closing">
     <Grid>
         <Grid>
             <Grid.RowDefinitions>

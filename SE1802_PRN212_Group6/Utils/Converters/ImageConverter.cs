@@ -4,7 +4,7 @@ using System.Windows.Data;
 
 namespace SE1802_PRN212_Group6.Utils.Converters
 {
-    class ImageConverter : IValueConverter
+    public class ImageConverter : IValueConverter
     {
         public object? Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

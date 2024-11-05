@@ -7,6 +7,8 @@
     <Application.Resources>
         <cv:FileToImageConverter x:Key="FileToImageConverter"/>
         <cv:ImageConverter x:Key="ImageConverter"/>
+        <cv:PriceConverter x:Key="PriceConverter"/>
+        <cv:PercentConverter x:Key="PercentConverter"/>
 
 
         <Style TargetType="ListViewItem">
