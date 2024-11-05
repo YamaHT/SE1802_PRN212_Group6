@@ -1,7 +1,4 @@
-﻿using SE1802_PRN212_Group6.Data;
-using SE1802_PRN212_Group6.Models;
-using SE1802_PRN212_Group6.Utils;
-using SE1802_PRN212_Group6.Views;
+﻿using SE1802_PRN212_Group6.Utils;
 using SE1802_PRN212_Group6.Views.Admin;
 using SE1802_PRN212_Group6.Views.User;
 using System.Windows.Controls;
@@ -75,7 +72,7 @@ namespace SE1802_PRN212_Group6.ViewModels.Login
                 return;
             }
 
-            var user = new User
+            var user = new Models.User
             {
                 Email = Email,
                 Password = passwordBox.Password,

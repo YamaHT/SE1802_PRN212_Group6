@@ -15,6 +15,7 @@ namespace SE1802_PRN212_Group6.ViewModels.User
 {
     public class Table_BookingViewModel : BaseViewModel
     {
+        public Models.User User { get; set; }
         public ObservableCollection<Booking> Bookings { get; set; }
         public IReadOnlyList<Table> Tables { get; set; }
         public ICommand ClearCommand { get; set; }
@@ -57,10 +58,10 @@ namespace SE1802_PRN212_Group6.ViewModels.User
             }
         }
 
-        public Table_BookingViewModel()
+        public Table_BookingViewModel(Models.User user)
         {
+            User = user;
             Tables = _unitOfWork.TableRepository.GetAll();
-
             Load();
 
             ClearCommand = new RelayCommand(Clear);
@@ -78,10 +79,9 @@ namespace SE1802_PRN212_Group6.ViewModels.User
 
         public void Add(object obj)
         {
-
+            Temp.User = User;
             if (Temp.TryValidate())
             {
-                Temp.Table = _unitOfWork.TableRepository.GetById(Temp.Table.Id);
                 _unitOfWork.BookingRepository.Add(Temp);
                 _unitOfWork.SaveChanges();
                 Clear(obj);

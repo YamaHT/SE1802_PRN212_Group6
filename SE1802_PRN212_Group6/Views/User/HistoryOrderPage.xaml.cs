@@ -20,7 +20,7 @@ namespace SE1802_PRN212_Group6.Views.User
     /// </summary>
     public partial class HistoryOrderPage : Page
     {
-        public HistoryOrderPage()
+        public HistoryOrderPage(Models.User user)
         {
             InitializeComponent();
         }

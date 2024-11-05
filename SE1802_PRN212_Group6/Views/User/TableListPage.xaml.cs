@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SE1802_PRN212_Group6.ViewModels.User;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,11 +21,11 @@ namespace SE1802_PRN212_Group6.Views.User
     /// </summary>
     public partial class TableListPage : Page
     {
-        public TableListPage()
+        public TableListPage(Models.User user)
         {
             InitializeComponent();
             bookingDatePicker.BlackoutDates.Add(new CalendarDateRange(DateTime.MinValue, DateTime.Now.AddDays(-1)));
-
+            DataContext = new Table_BookingViewModel(user);
         }
     }
 }
