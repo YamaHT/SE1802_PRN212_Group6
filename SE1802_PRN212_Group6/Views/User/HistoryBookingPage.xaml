@@ -9,10 +9,6 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Background="White"
       Title="HistoryBookingPage">
-
-    <Page.DataContext>
-        <vm:Table_BookingViewModel/>
-    </Page.DataContext>
     <Grid>
     </Grid>
 </Page>

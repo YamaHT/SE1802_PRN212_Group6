@@ -20,7 +20,7 @@ namespace SE1802_PRN212_Group6.Views.User
     /// </summary>
     public partial class ProductListPage : Page
     {
-        public ProductListPage()
+        public ProductListPage(Models.User user)
         {
             InitializeComponent();
         }

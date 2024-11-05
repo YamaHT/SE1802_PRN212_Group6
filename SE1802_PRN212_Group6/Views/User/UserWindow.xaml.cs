@@ -27,31 +27,31 @@ namespace SE1802_PRN212_Group6.Views.User
 
         private void ProductList_Click(object sender, RoutedEventArgs e)
         {
-            MainFrame.Content = new ProductListPage();
+            MainFrame.Content = new ProductListPage(User);
             MenuItemToCheck(ProductList);
         }
 
         private void TableList_Click(object sender, RoutedEventArgs e)
         {
-            MainFrame.Content = new TableListPage();
+            MainFrame.Content = new TableListPage(User);
             MenuItemToCheck(TableList);
         }
 
         private void Cart_Click(object sender, RoutedEventArgs e)
         {
-            MainFrame.Content = new CartPage();
+            MainFrame.Content = new CartPage(User);
             MenuItemToCheck(Cart);
         }
 
         private void HistoryOrder_Click(object sender, RoutedEventArgs e)
         {
-            MainFrame.Content = new HistoryOrderPage();
+            MainFrame.Content = new HistoryOrderPage(User);
             MenuItemToCheck(HistoryOrder);
         }
 
         private void HistoryBooking_Click(object sender, RoutedEventArgs e)
         {
-            MainFrame.Content = new HistoryBookingPage();
+            MainFrame.Content = new HistoryBookingPage(User);
             MenuItemToCheck(HistoryBooking);
         }
     }
