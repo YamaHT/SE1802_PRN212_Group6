@@ -24,8 +24,12 @@ namespace SE1802_PRN212_Group6.Views.User
         public TableListPage(Models.User user)
         {
             InitializeComponent();
-            bookingDatePicker.BlackoutDates.Add(new CalendarDateRange(DateTime.MinValue, DateTime.Now.AddDays(-1)));
             DataContext = new Table_BookingViewModel(user);
         }
+        private void bookingDatePicker_Loaded(object sender, RoutedEventArgs e)
+        {
+            bookingDatePicker.BlackoutDates.Add(new CalendarDateRange(DateTime.MinValue, DateTime.Now.AddDays(-1)));
+        }
+
     }
 }

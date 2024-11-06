@@ -15,7 +15,8 @@
             <ColumnDefinition Width="4*"/>
             <ColumnDefinition Width="6*"/>
         </Grid.ColumnDefinitions>
-        <ListView x:Name="list" Grid.Column="0" ItemsSource="{Binding Tables}" SelectedItem="{Binding Temp.Table, Mode=TwoWay}">
+        
+        <ListView x:Name="list" Grid.Column="0" ItemsSource="{Binding Tables}" SelectedItem="{Binding Select, Mode=TwoWay}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Width="50" Header="ID">
@@ -25,7 +26,7 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-
+                    
                     <GridViewColumn Header="Image" Width="100">
                         <GridViewColumn.CellTemplate >
                             <DataTemplate>
@@ -33,6 +34,7 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
+                    
                     <GridViewColumn Width="100" Header="Floor">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
@@ -48,40 +50,36 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
+                    
                 </GridView>
             </ListView.View>
         </ListView>
-        
+
         <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Column="1">
             <StackPanel Margin="20 0">
                 <Label Content="FullName" />
                 <TextBox Text="{Binding Temp.FullName, Mode=TwoWay}" />
-                
+
                 <Label Content="Phone" />
                 <TextBox Text="{Binding Temp.Phone, Mode=TwoWay}" />
 
                 <Label Content="Note" />
                 <TextBox Text="{Binding Temp.Note, Mode=TwoWay}" />
 
-                    <Label Content="BookingDate" />
-                    <DatePicker x:Name="bookingDatePicker"  SelectedDateFormat="{Binding Bookings.Temp.BookingDate, Mode=TwoWay}" />
+                <Label Content="Bookingdate" />
+                <DatePicker Name="bookingDatePicker" 
+                 Text="{Binding Temp.BookingDate, Mode=TwoWay}" 
+                 Loaded="bookingDatePicker_Loaded"/>
+
                 <Label Content="ArrivalTime"/>
-                <StackPanel>
-                    <ComboBox ItemsSource="{Binding TimeBox}" 
-            SelectedItem="{Binding Temp.ArrivalTime, Mode=TwoWay}" 
-                Grid.Column="1" 
-                        Grid.Row="3" 
-            VerticalContentAlignment="Center" 
-        Margin="5 10" 
-            IsEditable="True"/>
-                </StackPanel>
+                <ComboBox ItemsSource="{Binding FilteredTimeBox}" 
+                          SelectedItem="{Binding Temp.ArrivalTime, Mode=TwoWay}"/>
+
                 <Label Content="NumberofPeople" />
                 <TextBox Text="{Binding Temp.NumberOfPeople, Mode=TwoWay}" />
 
                 <Button Content="Add Booking" Command="{Binding AddCommand}" CommandParameter="{Binding ElementName=list}" Background="DeepSkyBlue" Margin="10"/>
-
             </StackPanel>
         </ScrollViewer>
-
     </Grid>
 </Page>
