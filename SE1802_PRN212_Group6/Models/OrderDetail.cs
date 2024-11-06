@@ -12,6 +12,7 @@ namespace SE1802_PRN212_Group6.Models
         public int ProductId { get; set; }
         public virtual Product? Product { get; set; }
 
-        public int Quantity { get; set; }
+        public int SubQuantity { get; set; }
+        public double SubTotal { get; set; }
     }
 }

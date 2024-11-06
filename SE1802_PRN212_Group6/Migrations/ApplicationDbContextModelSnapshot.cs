@@ -206,8 +206,11 @@ namespace SE1802_PRN212_Group6.Migrations
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Quantity")
+                    b.Property<int>("SubQuantity")
                         .HasColumnType("int");
+
+                    b.Property<decimal>("SubTotal")
+                        .HasColumnType("numeric(10, 2)");
 
                     b.HasKey("OrderId", "ProductId");
 

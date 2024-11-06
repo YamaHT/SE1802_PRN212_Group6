@@ -8,5 +8,5 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800"
         WindowStartupLocation="CenterScreen">
-    <Frame Name="MainFrame" NavigationUIVisibility="Hidden" VerticalAlignment="Stretch"/>
+    <Frame Name="MainFrame" NavigationUIVisibility="Hidden" VerticalAlignment="Stretch" Background="FloralWhite"/>
 </Window>

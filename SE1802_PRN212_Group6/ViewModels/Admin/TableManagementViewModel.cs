@@ -89,10 +89,10 @@ namespace SE1802_PRN212_Group6.ViewModels.Admin
         public void Load()
         {
             Tables = new ObservableCollection<Table>(_unitOfWork.TableRepository.GetAllWithDeleted());
-            ImagePresentation = "Not choose";
-            ImageDialog = null;
             Temp = new();
             Select = new();
+            ImagePresentation = "Not choose";
+            ImageDialog = null;
             OnPropertyChanged(nameof(Tables));
         }
 

@@ -64,7 +64,7 @@
                     <TextBox Text="{Binding Temp.Price, Mode=TwoWay}" />
 
                     <Label Content="Description" />
-                    <TextBox TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Text="{Binding Temp.Description, Mode=TwoWay}" />
+                    <TextBox TextWrapping="Wrap" MaxLines="5" MinLines="3" Text="{Binding Temp.Description, Mode=TwoWay}" />
 
                     <Label Content="Category" />
                     <ComboBox ItemsSource="{Binding Categories}" 
