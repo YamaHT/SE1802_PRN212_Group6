@@ -15,7 +15,7 @@
             <ColumnDefinition Width="4*"/>
             <ColumnDefinition Width="6*"/>
         </Grid.ColumnDefinitions>
-        
+
         <ListView x:Name="list" Grid.Column="0" ItemsSource="{Binding Tables}" SelectedItem="{Binding Select, Mode=TwoWay}">
             <ListView.View>
                 <GridView>
@@ -26,7 +26,7 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    
+
                     <GridViewColumn Header="Image" Width="100">
                         <GridViewColumn.CellTemplate >
                             <DataTemplate>
@@ -34,7 +34,7 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    
+
                     <GridViewColumn Width="100" Header="Floor">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
@@ -50,7 +50,7 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    
+
                 </GridView>
             </ListView.View>
         </ListView>
@@ -69,7 +69,9 @@
                 <Label Content="Bookingdate" />
                 <DatePicker Name="bookingDatePicker" 
                  Text="{Binding Temp.BookingDate, Mode=TwoWay}" 
-                 Loaded="bookingDatePicker_Loaded"/>
+                 SelectedDateChanged="bookingDatePicker_SelectedDateChanged"
+                 Loaded="bookingDatePicker_Loaded"
+                />
 
                 <Label Content="ArrivalTime"/>
                 <ComboBox ItemsSource="{Binding FilteredTimeBox}" 
@@ -79,6 +81,7 @@
                 <TextBox Text="{Binding Temp.NumberOfPeople, Mode=TwoWay}" />
 
                 <Button Content="Add Booking" Command="{Binding AddCommand}" CommandParameter="{Binding ElementName=list}" Background="DeepSkyBlue" Margin="10"/>
+                <Button Content="**You have to select table before booking**" Background="orange"></Button>
             </StackPanel>
         </ScrollViewer>
     </Grid>

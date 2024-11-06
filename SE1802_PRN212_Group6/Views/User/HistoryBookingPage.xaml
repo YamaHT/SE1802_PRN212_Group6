@@ -5,61 +5,85 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:SE1802_PRN212_Group6.Views.User"
       xmlns:vm="clr-namespace:SE1802_PRN212_Group6.ViewModels.User" 
-      xmlns:sys="clr-namespace:System;assembly=mscorlib" d:DataContext="{d:DesignInstance Type=vm:Table_BookingViewModel}"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Background="White"
       Title="HistoryBookingPage">
-   
+
+    <Page.DataContext>
+        <vm:HistoryBookingViewModel/>
+    </Page.DataContext>
+
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height='4*'></RowDefinition>
-            <RowDefinition Height='6*' ></RowDefinition>
-        </Grid.RowDefinitions>
-        <ListView x:Name="list" Grid.Row="0" ItemsSource="{Binding Bookings}" SelectedItem="{Binding Select, Mode=TwoWay}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="8*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+
+        <ListView x:Name="list" Grid.Column="0" ItemsSource="{Binding Bookings}" SelectedItem="{Binding Select}">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Width="50" Header="Fullname">
+                    <GridViewColumn Header="Id">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding FullName}" HorizontalAlignment="Right" />
+                                <TextBlock TextAlignment="Right" Text="{Binding Id}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Fullname" Width="100" DisplayMemberBinding="{Binding FullName}"/>
+                    <GridViewColumn Header="Phone" DisplayMemberBinding="{Binding Phone}"/>
+                    <GridViewColumn Header="Note" Width="100">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox TextWrapping="Wrap" MaxLines="5" MinLines="3" Text="{Binding Note, Mode=TwoWay}" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
 
-                    <GridViewColumn Width="100" Header="Phone">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding Phone}" HorizontalAlignment="Right" />
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-
-                    <GridViewColumn Width="60" Header="Note">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding Note}" HorizontalAlignment="Left" />
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-
+                    <GridViewColumn Header="BookingDate" Width="90" DisplayMemberBinding="{Binding BookingDate}"/>
+                    <GridViewColumn Header="ArrivalTime" Width="90" DisplayMemberBinding="{Binding ArrivalTime}"/>
+                    <GridViewColumn Header="NumberofPeople" DisplayMemberBinding="{Binding NumberOfPeople}"/>
                 </GridView>
             </ListView.View>
         </ListView>
 
-        <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1">
-            <StackPanel Margin="20 0">
-                <Label Content="FullName" />
-                <TextBox Text="{Binding Temp.FullName, Mode=TwoWay}" />
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="7*"/>
+                <RowDefinition Height="3*"/>
+            </Grid.RowDefinitions>
 
-                <Label Content="Phone" />
-                <TextBox Text="{Binding Temp.Phone, Mode=TwoWay}" />
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <StackPanel Margin="20 0">
+                    <Label Content="Id" />
+                    <TextBox IsReadOnly="True" Text="{Binding Select.Id, Mode=TwoWay}" />
 
-                <Label Content="Note" />
-                <TextBox Text="{Binding Temp.Note, Mode=TwoWay}" />
+                    <Label Content="Fullname" />
+                    <TextBox Text="{Binding Temp.FullName, Mode=TwoWay}" />
 
-                <Button Content="Update Booking" Command="{Binding UpdateCommand}" CommandParameter="{Binding ElementName=list}" Background="LawnGreen" Margin="10"/>
-            </StackPanel>
-        </ScrollViewer>
+                    <Label Content="Phone" />
+                    <TextBox Text="{Binding Temp.Phone, Mode=TwoWay}" />
+
+                    <Label Content="Note" />
+                    <TextBox Text="{Binding Temp.Note, Mode=TwoWay}" />
+                </StackPanel>
+            </ScrollViewer>
+
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Button Content="Clear" Command="{Binding ClearCommand}" CommandParameter="{Binding ElementName=list}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Background="#eee" Foreground="Red"/>
+                <Button Content="Update" Command="{Binding UpdateCommand}" CommandParameter="{Binding ElementName=list}" Grid.Row="1" Grid.Column="1" Background="DeepSkyBlue"/>
+                <Button Content="Delete" Command="{Binding DeleteCommand}" CommandParameter="{Binding ElementName=list}" Grid.Row="1" Grid.Column="0" Background="OrangeRed"/>
+            </Grid>
+        </Grid>
     </Grid>
 </Page>
