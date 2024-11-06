@@ -1,5 +1,7 @@
 ﻿using SE1802_PRN212_Group6.Models;
 using SE1802_PRN212_Group6.Utils;
+using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -7,9 +9,15 @@ namespace SE1802_PRN212_Group6.ViewModels.User
 {
     public class CheckoutInfoDTO
     {
+        [Required(ErrorMessage = "Recipient Name is required")]
         public string? RecipientName { get; set; }
+
+        [Required(ErrorMessage = "Address is required")]
         public string? Address { get; set; }
+
+        [Required(ErrorMessage = "Phone is required")]
         public string? Phone { get; set; }
+
         public Voucher? Voucher { get; set; }
     }
 
@@ -17,6 +25,8 @@ namespace SE1802_PRN212_Group6.ViewModels.User
     {
         public Models.User User { get; set; }
         public Order? Order { get; set; }
+
+        public ObservableCollection<OrderDetail> OrderDetails { get; set; }
         public IReadOnlyList<Voucher> Vouchers { get; set; }
 
         public CheckoutInfoDTO CheckoutInfoDTO { get; set; }
@@ -58,10 +68,11 @@ namespace SE1802_PRN212_Group6.ViewModels.User
         {
             this.User = user;
             Vouchers = _unitOfWork.VoucherRepository.GetAllValidVouchers();
+            CheckoutInfoDTO = new();
             Load();
 
-            MinusCommand = new RelayCommand(Minus);
-            PlusCommand = new RelayCommand(Plus);
+            MinusCommand = new RelayCommand(Minus, (object obj) => Select.ProductId != 0);
+            PlusCommand = new RelayCommand(Plus, (object obj) => Select.ProductId != 0);
             ClearCommand = new RelayCommand(Clear);
             UpdateCommand = new RelayCommand(Update);
             DeleteCommand = new RelayCommand(Delete);
@@ -78,14 +89,16 @@ namespace SE1802_PRN212_Group6.ViewModels.User
                 _unitOfWork.SaveChanges();
             }
 
+            OrderDetails = new(Order.OrderDetails);
             Temp = new();
             Select = new();
             OnPropertyChanged(nameof(Order));
+            OnPropertyChanged(nameof(OrderDetails));
         }
 
         public void Minus(object obj)
         {
-            Temp.SubQuantity--;
+            Temp.SubQuantity = Math.Max(1, Temp.SubQuantity - 1);
             OnPropertyChanged(nameof(Temp));
         }
 
@@ -127,6 +140,11 @@ namespace SE1802_PRN212_Group6.ViewModels.User
                 return;
             }
 
+            if (!CheckoutInfoDTO.TryValidate())
+            {
+                return;
+            }
+
             Order.Quantity = Order.OrderDetails.Sum(x => x.SubQuantity);
             Order.Total = Order.OrderDetails.Sum(x => x.SubTotal);
 
@@ -134,20 +152,21 @@ namespace SE1802_PRN212_Group6.ViewModels.User
 
             if (CheckoutInfoDTO.Voucher != null)
             {
-                actualPayment = Order.Total - Math.Min(Order.Total * (CheckoutInfoDTO.Voucher.ReducedPercent / 100), CheckoutInfoDTO.Voucher.MaxReducing);
+                var voucher = _unitOfWork.VoucherRepository.GetById(CheckoutInfoDTO.Voucher.Id)!;
 
-                var voucher = _unitOfWork.VoucherRepository.GetById(CheckoutInfoDTO.Voucher.Id);
+                actualPayment = Order.Total - Math.Min(Order.Total * (voucher.ReducedPercent / 100), voucher.MaxReducing);
+
                 voucher.Quantity = Math.Max(0, voucher.Quantity - 1);
                 _unitOfWork.VoucherRepository.Update(voucher);
+
+                Order.Voucher = voucher;
             }
 
             Order.ActualPayment = actualPayment;
-
             Order.OrderDate = DateOnly.FromDateTime(DateTime.Now);
             Order.RecipientName = CheckoutInfoDTO.RecipientName;
             Order.Address = CheckoutInfoDTO.Address;
             Order.Phone = CheckoutInfoDTO.Phone;
-            Order.Voucher = CheckoutInfoDTO.Voucher;
 
             if (Order.TryValidate())
             {
@@ -172,7 +191,6 @@ namespace SE1802_PRN212_Group6.ViewModels.User
             {
                 listRoom.UnselectAll();
             }
-            Order = null;
             Load();
         }
     }

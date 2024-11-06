@@ -57,7 +57,8 @@
                 <ListView.View>
                     <GridView AllowsColumnReorder="False">
                         <GridViewColumn Header="Product Id" DisplayMemberBinding="{Binding ProductId}"/>
-                        <GridViewColumn Header="Quantity" DisplayMemberBinding="{Binding Quantity}"/>
+                        <GridViewColumn Header="Quantity" DisplayMemberBinding="{Binding SubQuantity}"/>
+                        <GridViewColumn Header="Price" DisplayMemberBinding="{Binding SubTotal, Converter={StaticResource PriceConverter}}"/>
                         <GridViewColumn Header="Image">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
@@ -66,7 +67,6 @@
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
                         <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Product.Name}"/>
-                        <GridViewColumn Header="Price" DisplayMemberBinding="{Binding Product.Price}"/>
                         <GridViewColumn Header="Category" DisplayMemberBinding="{Binding Product.Category.Name}"/>
                     </GridView>
                 </ListView.View>
