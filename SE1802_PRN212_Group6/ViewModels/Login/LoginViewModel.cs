@@ -85,10 +85,13 @@ namespace SE1802_PRN212_Group6.ViewModels.Login
                 Password = passwordBox.Password,
             };
 
-            _unitOfWork.UserRepository.Add(user);
-            _unitOfWork.SaveChanges();
-            Dialog.ShowSuccess("Register successfully");
-            ChangeToLogin(obj);
+            if (user.TryValidate())
+            {
+                _unitOfWork.UserRepository.Add(user);
+                _unitOfWork.SaveChanges();
+                Dialog.ShowSuccess("Register successfully");
+                ChangeToLogin(obj);
+            }
         }
 
         public void ChangeToLogin(object obj)
