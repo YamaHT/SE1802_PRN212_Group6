@@ -32,7 +32,14 @@
                     </GridViewColumn>
                     <GridViewColumn Header="Fullname" Width="100" DisplayMemberBinding="{Binding FullName}"/>
                     <GridViewColumn Header="Phone" DisplayMemberBinding="{Binding Phone}"/>
-                    <GridViewColumn Header="Note" Width="100" DisplayMemberBinding="{Binding Note}"/>
+                    <GridViewColumn Header="Note" Width="100">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox TextWrapping="Wrap" MaxLines="5" MinLines="3" Text="{Binding Note, Mode=TwoWay}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
                     <GridViewColumn Header="BookingDate" Width="90" DisplayMemberBinding="{Binding BookingDate}"/>
                     <GridViewColumn Header="ArrivalTime" Width="90" DisplayMemberBinding="{Binding ArrivalTime}"/>
                     <GridViewColumn Header="NumberofPeople" DisplayMemberBinding="{Binding NumberOfPeople}"/>
