@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SE1802_PRN212_Group6.Models.Enums;
-using SE1802_PRN212_Group6.Utils;
-using System.Windows.Input;
+﻿using Microsoft.Win32;
 using SE1802_PRN212_Group6.Models;
-using Microsoft.Win32;
+using SE1802_PRN212_Group6.Utils;
+using System.Collections.ObjectModel;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace SE1802_PRN212_Group6.ViewModels.Admin
 {
@@ -84,7 +78,7 @@ namespace SE1802_PRN212_Group6.ViewModels.Admin
 
         public EmployeeManagementViewModel(Models.User user)
         {
-            User = user ; 
+            User = user;
             ClearCommand = new RelayCommand(Clear);
             AddCommand = new RelayCommand(Add);
             UpdateCommand = new RelayCommand(Update);
@@ -100,7 +94,7 @@ namespace SE1802_PRN212_Group6.ViewModels.Admin
             );
             Temp = new Employee();
             Select = new Employee();
-            ImagePresentation = "Not chosen";
+            ImagePresentation = "Not choose";
             ImageDialog = null;
             OnPropertyChanged(nameof(Employees));
         }

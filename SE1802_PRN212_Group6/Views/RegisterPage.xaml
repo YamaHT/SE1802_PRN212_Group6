@@ -15,7 +15,7 @@
             <TextBox Name="Email" Text="{Binding Email}" Padding="10"/>
             <Label Content="Password"/>
             <PasswordBox Name="Password" Padding="10"/>
-            <Button x:Name="LoginButton" Command="{Binding RegisterCommand}" CommandParameter="{Binding ElementName=Password}" Content="Register" Margin="0 10 0 0" FontSize="20" Foreground="WhiteSmoke" Background="RoyalBlue"/>
+            <Button x:Name="LoginButton" Command="{Binding RegisterCommand}" CommandParameter="{Binding ElementName=Password}" Content="Register" Margin="0 10 0 0" FontSize="20" Foreground="WhiteSmoke" Background="ForestGreen"/>
             <Button x:Name="ChangeToRegisterButton" Command="{Binding ChangeToLoginCommand}" Margin="0 10 0 0" HorizontalAlignment="Right" Content="Login here">
                 <Button.Style>
                     <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">

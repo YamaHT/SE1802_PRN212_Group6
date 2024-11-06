@@ -43,6 +43,7 @@
                         <GridViewColumn Header="Address" DisplayMemberBinding="{Binding Address}"/>
                         <GridViewColumn Header="OrderDate" DisplayMemberBinding="{Binding OrderDate}"/>
                         <GridViewColumn Header="Voucher Reduce" DisplayMemberBinding="{Binding Voucher.ReducedPercent, Converter={StaticResource PercentConverter}}"/>
+                        <GridViewColumn Header="Max Reducing" DisplayMemberBinding="{Binding Voucher.MaxReducing, Converter={StaticResource PriceConverter}}"/>
                     </GridView>
                 </ListView.View>
             </ListView>

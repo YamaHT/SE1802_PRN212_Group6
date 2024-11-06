@@ -9,6 +9,7 @@
         <cv:ImageConverter x:Key="ImageConverter"/>
         <cv:PriceConverter x:Key="PriceConverter"/>
         <cv:PercentConverter x:Key="PercentConverter"/>
+        <cv:GenderConverter x:Key="GenderConverter"/>
 
 
         <Style TargetType="ListViewItem">
