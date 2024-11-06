@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SE1802_PRN212_Group6.ViewModels.User;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,8 @@ namespace SE1802_PRN212_Group6.Views.User
         public HistoryBookingPage(Models.User user)
         {
             InitializeComponent();
+            DataContext = new Table_BookingViewModel(user);
+
         }
     }
 }
