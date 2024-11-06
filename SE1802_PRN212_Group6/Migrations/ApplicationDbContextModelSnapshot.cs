@@ -30,10 +30,12 @@ namespace SE1802_PRN212_Group6.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<TimeOnly>("ArrivalTime")
+                    b.Property<TimeOnly?>("ArrivalTime")
+                        .IsRequired()
                         .HasColumnType("time");
 
-                    b.Property<DateOnly>("BookingDate")
+                    b.Property<DateOnly?>("BookingDate")
+                        .IsRequired()
                         .HasColumnType("date");
 
                     b.Property<string>("FullName")
