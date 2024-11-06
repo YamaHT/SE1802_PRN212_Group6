@@ -13,9 +13,7 @@ namespace SE1802_PRN212_Group6.ViewModels.User
         public ObservableCollection<string> FilteredTimeBox { get; set; }
         public List<string> TimeBox { get; set; }
         public IReadOnlyList<Table> Tables { get; set; }
-        public ICommand ClearCommand { get; set; }
         public ICommand AddCommand { get; set; }
-        public ICommand UpdateCommand { get; set; }
         public ICommand OnDateChangeCommand { get; set; }
 
         private Table _select { get; set; }
@@ -47,7 +45,6 @@ namespace SE1802_PRN212_Group6.ViewModels.User
             TimeBox = ["18:00", "18:30", "19:00", "19:30", "20:00", "20:30", "21:00"];
             FilteredTimeBox = [];
             Load();
-            ClearCommand = new RelayCommand(Clear);
             AddCommand = new RelayCommand(Add);
             OnDateChangeCommand = new RelayCommand((object obj) => FilterAvailableTimes());
         }

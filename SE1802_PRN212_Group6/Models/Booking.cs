@@ -19,7 +19,7 @@ namespace SE1802_PRN212_Group6.Models
         [MaxLength(1000, ErrorMessage = "Note can't exceed 1000 characters")]
         public string? Note { get; set; }
 
-        [Required(ErrorMessage = "Bookingdate is required")]
+        [Required(ErrorMessage = "BookingDate is required")]
         public DateOnly? BookingDate { get; set; } = null;
 
         [Required(ErrorMessage = "ArrivalTime is required")]

@@ -17,7 +17,6 @@ namespace SE1802_PRN212_Group6.ViewModels.User
         public ObservableCollection<Booking> Bookings { get; set; }
 
         public ICommand ClearCommand { get; set; }
-        public ICommand AddCommand { get; set; }
         public ICommand UpdateCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
 

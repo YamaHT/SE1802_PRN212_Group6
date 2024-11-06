@@ -16,8 +16,8 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="6*"/>
-            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="8*"/>
+            <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
 
         <ListView x:Name="list" Grid.Column="0" ItemsSource="{Binding Bookings}" SelectedItem="{Binding Select}">
