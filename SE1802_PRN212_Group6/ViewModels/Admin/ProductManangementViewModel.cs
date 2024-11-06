@@ -121,7 +121,7 @@ namespace SE1802_PRN212_Group6.ViewModels.Admin
 
         public void Delete(object obj)
         {
-            if (Dialog.ShowConfirm($"Are you sure you want to delete this table? (Id: {Select.Id})"))
+            if (Dialog.ShowConfirm($"Are you sure you want to delete this product? (Id: {Select.Id})"))
             {
 
                 var get = _unitOfWork.ProductRepository.GetById(Select.Id);
@@ -159,7 +159,7 @@ namespace SE1802_PRN212_Group6.ViewModels.Admin
 
         public void Restore(object obj)
         {
-            if (Dialog.ShowConfirm($"Are you sure you want to restore this table? (Id: {Select.Id})"))
+            if (Dialog.ShowConfirm($"Are you sure you want to restore this product? (Id: {Select.Id})"))
             {
                 var get = _unitOfWork.ProductRepository.GetById(Select.Id);
                 if (get != null)

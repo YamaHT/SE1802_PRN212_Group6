@@ -27,7 +27,7 @@ namespace SE1802_PRN212_Group6.ViewModels.User
         public void Load()
         {
             string[] includes = ["Category"];
-            Products = new ObservableCollection<Product>(_unitOfWork.ProductRepository.GetAllWithDeleted(includes));
+            Products = new ObservableCollection<Product>(_unitOfWork.ProductRepository.GetAll(includes));
 
             OnPropertyChanged(nameof(Products));
         }
