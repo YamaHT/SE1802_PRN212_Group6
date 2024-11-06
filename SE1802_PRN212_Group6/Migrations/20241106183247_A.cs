@@ -205,7 +205,8 @@ namespace SE1802_PRN212_Group6.Migrations
                 {
                     OrderId = table.Column<int>(type: "int", nullable: false),
                     ProductId = table.Column<int>(type: "int", nullable: false),
-                    Quantity = table.Column<int>(type: "int", nullable: false)
+                    SubQuantity = table.Column<int>(type: "int", nullable: false),
+                    SubTotal = table.Column<decimal>(type: "numeric(10,2)", nullable: false)
                 },
                 constraints: table =>
                 {

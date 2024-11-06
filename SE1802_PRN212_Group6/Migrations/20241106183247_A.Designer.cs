@@ -12,7 +12,7 @@ using SE1802_PRN212_Group6.Data;
 namespace SE1802_PRN212_Group6.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241106070151_A")]
+    [Migration("20241106183247_A")]
     partial class A
     {
         /// <inheritdoc />
@@ -209,8 +209,11 @@ namespace SE1802_PRN212_Group6.Migrations
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Quantity")
+                    b.Property<int>("SubQuantity")
                         .HasColumnType("int");
+
+                    b.Property<decimal>("SubTotal")
+                        .HasColumnType("numeric(10, 2)");
 
                     b.HasKey("OrderId", "ProductId");
 

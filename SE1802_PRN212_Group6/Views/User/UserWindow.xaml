@@ -58,7 +58,7 @@
                 <MenuItem x:Name="HistoryOrder" Header="History Order" Click="HistoryOrder_Click"/>
                 <MenuItem x:Name="HistoryBooking" Header="History Booking" Click="HistoryBooking_Click" />
             </Menu>
-            <Frame Name="MainFrame" Grid.Row="1" NavigationUIVisibility="Hidden" VerticalAlignment="Stretch"/>
+            <Frame Name="MainFrame" Grid.Row="1" NavigationUIVisibility="Hidden" Background="FloralWhite" VerticalAlignment="Stretch"/>
         </Grid>
     </Grid>
 </Window>

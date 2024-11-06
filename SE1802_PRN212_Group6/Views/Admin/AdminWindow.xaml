@@ -23,6 +23,6 @@
             <MenuItem x:Name="TableM" Header="Table Management" Click="TableM_Click"/>
             <MenuItem x:Name="VoucherM" Header="Voucher Management" Click="VoucherM_Click"/>
         </Menu>
-        <Frame Name="MainFrame" Grid.Column="1" NavigationUIVisibility="Hidden" VerticalAlignment="Stretch" />
+        <Frame Name="MainFrame" Grid.Column="1" NavigationUIVisibility="Hidden" Background="FloralWhite" VerticalAlignment="Stretch" />
     </Grid>
 </Window>

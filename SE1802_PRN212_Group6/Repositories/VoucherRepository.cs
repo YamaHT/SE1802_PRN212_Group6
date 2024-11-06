@@ -17,5 +17,14 @@ namespace SE1802_PRN212_Group6.Repositories
             }
             return list;
         }
+
+        public List<Voucher> GetAllValidVouchers()
+        {
+            return GetAll()
+                .Where(x => x.Quantity > 0
+                        && x.ExpiredDate >= DateOnly.FromDateTime(DateTime.Now)
+                        && !x.IsDeleted)
+                .ToList();
+        }
     }
 }
