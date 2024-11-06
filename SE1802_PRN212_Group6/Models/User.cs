@@ -17,5 +17,6 @@ namespace SE1802_PRN212_Group6.Models
 
         public virtual ICollection<Booking> Bookings { get; set; } = [];
         public virtual ICollection<Order> Orders { get; set; } = [];
+        public virtual ICollection<Employee> Employees { get; set; } = [];
     }
 }
