@@ -122,7 +122,7 @@ namespace SE1802_PRN212_Group6.ViewModels.Admin
                 Dialog.ShowError(validationError);
                 return;
             }
-
+            Temp.ManagerId = User.Id;
             Temp.IdentificationCard = Temp.IdentificationCard.Trim();
             Temp.Phone = Temp.Phone.Trim();
 
