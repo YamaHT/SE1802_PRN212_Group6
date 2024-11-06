@@ -135,6 +135,9 @@ namespace SE1802_PRN212_Group6.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
+                    b.Property<int>("ManagerId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Phone")
                         .IsRequired()
                         .HasColumnType("char(10)");
@@ -143,6 +146,8 @@ namespace SE1802_PRN212_Group6.Migrations
                         .HasColumnType("numeric(10, 2)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ManagerId");
 
                     b.ToTable("Employee");
                 });
@@ -178,7 +183,7 @@ namespace SE1802_PRN212_Group6.Migrations
                     b.Property<decimal>("Total")
                         .HasColumnType("numeric(10, 2)");
 
-                    b.Property<int>("UserId")
+                    b.Property<int?>("UserId")
                         .HasColumnType("int");
 
                     b.Property<int?>("VoucherId")
@@ -394,13 +399,22 @@ namespace SE1802_PRN212_Group6.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("SE1802_PRN212_Group6.Models.Employee", b =>
+                {
+                    b.HasOne("SE1802_PRN212_Group6.Models.User", "User")
+                        .WithMany("Employees")
+                        .HasForeignKey("ManagerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("SE1802_PRN212_Group6.Models.Order", b =>
                 {
                     b.HasOne("SE1802_PRN212_Group6.Models.User", "User")
                         .WithMany("Orders")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
 
                     b.HasOne("SE1802_PRN212_Group6.Models.Voucher", "Voucher")
                         .WithMany()
@@ -464,6 +478,8 @@ namespace SE1802_PRN212_Group6.Migrations
             modelBuilder.Entity("SE1802_PRN212_Group6.Models.User", b =>
                 {
                     b.Navigation("Bookings");
+
+                    b.Navigation("Employees");
 
                     b.Navigation("Orders");
                 });

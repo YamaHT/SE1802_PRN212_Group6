@@ -38,6 +38,12 @@ namespace SE1802_PRN212_Group6.ViewModels.Login
                 return;
             }
 
+            var validateUser = new Models.User { Email = Email, Password = passwordBox.Password };
+            if (!validateUser.TryValidate())
+            {
+                return;
+            }
+
             var user = _unitOfWork.UserRepository.GetByEmailAndPassword(Email, passwordBox.Password);
             if (user == null)
             {

@@ -27,25 +27,6 @@ namespace SE1802_PRN212_Group6.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Employee",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Image = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
-                    FullName = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
-                    IdentificationCard = table.Column<string>(type: "char(12)", nullable: false),
-                    Phone = table.Column<string>(type: "char(10)", nullable: false),
-                    Birthday = table.Column<DateOnly>(type: "date", nullable: false),
-                    Gender = table.Column<bool>(type: "bit", nullable: false),
-                    Salary = table.Column<decimal>(type: "numeric(10,2)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Employee", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Table",
                 columns: table => new
                 {
@@ -162,6 +143,32 @@ namespace SE1802_PRN212_Group6.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Employee",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Image = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    FullName = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    IdentificationCard = table.Column<string>(type: "char(12)", nullable: false),
+                    Phone = table.Column<string>(type: "char(10)", nullable: false),
+                    Birthday = table.Column<DateOnly>(type: "date", nullable: false),
+                    Gender = table.Column<bool>(type: "bit", nullable: false),
+                    Salary = table.Column<decimal>(type: "numeric(10,2)", nullable: false),
+                    ManagerId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Employee", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Employee_User_ManagerId",
+                        column: x => x.ManagerId,
+                        principalTable: "User",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Order",
                 columns: table => new
                 {
@@ -174,7 +181,7 @@ namespace SE1802_PRN212_Group6.Migrations
                     RecipientName = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     Address = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     Phone = table.Column<string>(type: "char(10)", nullable: true),
-                    UserId = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: true),
                     VoucherId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -184,8 +191,7 @@ namespace SE1802_PRN212_Group6.Migrations
                         name: "FK_Order_User_UserId",
                         column: x => x.UserId,
                         principalTable: "User",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Order_Voucher_VoucherId",
                         column: x => x.VoucherId,
@@ -238,6 +244,11 @@ namespace SE1802_PRN212_Group6.Migrations
                 name: "IX_Booking_UserId",
                 table: "Booking",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Employee_ManagerId",
+                table: "Employee",
+                column: "ManagerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Order_UserId",

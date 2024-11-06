@@ -27,9 +27,11 @@ namespace SE1802_PRN212_Group6.Models
         public int NumberOfPeople { get; set; }
 
         [Required(ErrorMessage = "User is required")]
+        public int UserId { get; set; }
         public virtual User? User { get; set; }
 
         [Required(ErrorMessage = "Table is required")]
+        public int TableId { get; set; }
         public virtual Table? Table { get; set; }
     }
 }

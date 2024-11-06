@@ -20,7 +20,7 @@ namespace SE1802_PRN212_Group6.Models
 
         [Required(ErrorMessage = "IdentificationCard is required")]
         [Phone(ErrorMessage = "IdentificationCard must only contain numbers")]
-        [Length(12, 12, ErrorMessage = "IdentificationCard must be 10 characters")]
+        [Length(12, 12, ErrorMessage = "IdentificationCard must be 12 characters")]
         [Column(TypeName = "char(12)")]
         public string? IdentificationCard { get; set; }
 
@@ -36,5 +36,9 @@ namespace SE1802_PRN212_Group6.Models
 
         [Range(1, double.MaxValue, ErrorMessage = "Salary must greater than 0")]
         public double Salary { get; set; }
+
+        [ForeignKey("User")]
+        public int ManagerId { get; set; }
+        public virtual User? User { get; set; }
     }
 }
