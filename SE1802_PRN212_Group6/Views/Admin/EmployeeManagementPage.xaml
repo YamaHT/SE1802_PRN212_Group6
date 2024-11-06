@@ -10,9 +10,6 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Background="White"
       Title="EmployeeManagementPage">
-    <Page.DataContext>
-        <vm:EmployeeManagementViewModel></vm:EmployeeManagementViewModel>
-    </Page.DataContext>
     <Page.Resources>
         <co:GenderConverter x:Key="GenderConverter" />
     </Page.Resources>
@@ -77,7 +74,13 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-
+                    <GridViewColumn Header="ManagerId">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock TextAlignment="Right" Text="{Binding ManagerId}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
                 </GridView>
             </ListView.View>
         </ListView>
@@ -105,7 +108,7 @@
 
                     <Label Content="Salary" />
                     <TextBox Text="{Binding Temp.Salary, Mode=TwoWay}" />
-                    <Label Content="Image" />
+                    <Label Content="Salary" />
                     <Image Height="50 " Source="{Binding Temp.Image, Converter={StaticResource ImageConverter}, ConverterParameter=Employee}"/>
                     <Button Content="Choose Image" Command="{Binding ChooseImageCommand}"/>
                     <Image Height="100" Stretch="Uniform" StretchDirection="DownOnly" Source="{Binding ImageDialog.FileName}" />
@@ -120,8 +123,8 @@
                     <RowDefinition/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <Button Content="Clear" Command="{Binding ClearCommand}" CommandParameter="{Binding ElementName=list}" Grid.Row="0" Grid.Column="1" Background="#eee" Foreground="Red" Margin="2,2,0,2"/>
-                <Button Content="Add" Command="{Binding AddCommand}" CommandParameter="{Binding ElementName=list}" Grid.Row="0" Grid.Column="0" Background="ForestGreen"  Margin="2,2,2,2"/>
+                <Button Content="Clear" Command="{Binding ClearCommand}" CommandParameter="{Binding ElementName=list}" Grid.Row="0" Grid.Column="0" Background="#eee" Foreground="Red" Margin="2,2,0,2"/>
+                <Button Content="Add" Command="{Binding AddCommand}" CommandParameter="{Binding ElementName=list}" Grid.Row="0" Grid.Column="1" Background="ForestGreen"  Margin="2,2,2,2"/>
                 <Button Content="Update" Command="{Binding UpdateCommand}" CommandParameter="{Binding ElementName=list}" Grid.Row="1" Grid.Column="1" Background="DeepSkyBlue"  Margin="2,2,2,2"/>
                 <Button Content="Delete" Command="{Binding DeleteCommand}" CommandParameter="{Binding ElementName=list}" Grid.Row="1" Grid.Column="0" Background="OrangeRed" Margin="2,2,2,2"/>
             </Grid>

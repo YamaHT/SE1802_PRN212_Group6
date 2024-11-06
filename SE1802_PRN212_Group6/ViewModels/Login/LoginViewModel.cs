@@ -53,7 +53,7 @@ namespace SE1802_PRN212_Group6.ViewModels.Login
 
             if (user.Role)
             {
-                new AdminWindow().Show();
+                new AdminWindow(user).Show();
             }
             else
             {

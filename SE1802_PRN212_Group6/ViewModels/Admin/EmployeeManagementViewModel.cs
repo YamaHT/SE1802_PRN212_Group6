@@ -15,7 +15,7 @@ namespace SE1802_PRN212_Group6.ViewModels.Admin
 {
     public class EmployeeManagementViewModel : BaseViewModel
     {
-        public IReadOnlyList<string> Types { get; set; }
+        public Models.User User { get; set; }
         private OpenFileDialog? _imageDialog { get; set; }
         public OpenFileDialog? ImageDialog
         {
@@ -57,6 +57,7 @@ namespace SE1802_PRN212_Group6.ViewModels.Admin
                 if (_select != null)
                 {
                     ImagePresentation = _select.Image;
+                    Temp.ManagerId = _select.ManagerId;
                     Temp.Image = _select.Image;
                     ImageDialog = null;
                     Temp.Salary = _select.Salary;
@@ -81,24 +82,25 @@ namespace SE1802_PRN212_Group6.ViewModels.Admin
             }
         }
 
-        public EmployeeManagementViewModel()
+        public EmployeeManagementViewModel(Models.User user)
         {
-            Types = Enum.GetValues(typeof(TypeEnum)).Cast<TypeEnum>().Select(x => x.ToString()).ToList();
-            Load();
-
+            User = user ; 
             ClearCommand = new RelayCommand(Clear);
             AddCommand = new RelayCommand(Add);
             UpdateCommand = new RelayCommand(Update);
             DeleteCommand = new RelayCommand(Delete);
             ChooseImageCommand = new RelayCommand(ChooseImage);
+            Load();
         }
 
         public void Load()
         {
-            Employees = new ObservableCollection<Employee>(_unitOfWork.EmployeeRepository.GetAll());
-            Temp = new();
-            Select = new();
-            ImagePresentation = "Not choose";
+            Employees = new ObservableCollection<Employee>(
+                _unitOfWork.EmployeeRepository.GetAll(["User"]).Where(e => e.ManagerId == User.Id)
+            );
+            Temp = new Employee();
+            Select = new Employee();
+            ImagePresentation = "Not chosen";
             ImageDialog = null;
             OnPropertyChanged(nameof(Employees));
         }
@@ -117,7 +119,7 @@ namespace SE1802_PRN212_Group6.ViewModels.Admin
                 Dialog.ShowError(validationError);
                 return;
             }
-
+            Temp.ManagerId = User.Id;
             Temp.IdentificationCard = Temp.IdentificationCard.Trim();
             Temp.Phone = Temp.Phone.Trim();
 
@@ -138,12 +140,12 @@ namespace SE1802_PRN212_Group6.ViewModels.Admin
             var get = _unitOfWork.EmployeeRepository.GetById(Select.Id);
             if (get != null)
             {
-                Boolean ct =Dialog.ShowConfirm("Delete employee ??");
+                Boolean ct = Dialog.ShowConfirm("Delete employee ??");
                 if (ct)
                 {
                     _unitOfWork.EmployeeRepository.Remove(get);
                     _unitOfWork.SaveChanges();
-                }     
+                }
                 Clear(obj);
             }
         }
@@ -190,6 +192,7 @@ namespace SE1802_PRN212_Group6.ViewModels.Admin
 
                 if (Temp.TryValidate())
                 {
+                    get.ManagerId = Temp.ManagerId;
                     get.Salary = Temp.Salary;
                     get.Phone = Temp.Phone.Trim();
                     get.Birthday = Temp.Birthday;
@@ -205,7 +208,7 @@ namespace SE1802_PRN212_Group6.ViewModels.Admin
                     Clear(obj);
                     Dialog.ShowSuccess("Update complete");
                 }
-               
+
             }
         }
 
@@ -257,7 +260,7 @@ namespace SE1802_PRN212_Group6.ViewModels.Admin
             }
 
             if (_unitOfWork.EmployeeRepository.GetAll()
-                .Any(e => e.IdentificationCard == trimmedIdCard && e.Id != Temp.Id)) 
+                .Any(e => e.IdentificationCard == trimmedIdCard && e.Id != Temp.Id))
             {
                 return "IdentificationCard already exists. Please use a different one.";
             }
@@ -268,11 +271,12 @@ namespace SE1802_PRN212_Group6.ViewModels.Admin
         private string ValidatePhone()
         {
             var trimmedPhone = Temp.Phone.Trim();
-            if (trimmedPhone != Temp.Phone ||  trimmedPhone.Contains(" ")) {
+            if (trimmedPhone != Temp.Phone || trimmedPhone.Contains(" "))
+            {
                 return "Phone cannot have leading, trailing, or internal spaces. ";
             }
             if (_unitOfWork.EmployeeRepository.GetAll()
-                .Any(e => e.Phone == trimmedPhone && e.Id != Temp.Id)) 
+                .Any(e => e.Phone == trimmedPhone && e.Id != Temp.Id))
             {
                 return "Phone number already exists. Please use a different one.";
             }
