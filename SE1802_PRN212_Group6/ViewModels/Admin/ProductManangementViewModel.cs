@@ -114,18 +114,23 @@ namespace SE1802_PRN212_Group6.ViewModels.Admin
                 Temp.Category = _unitOfWork.CategoryRepository.GetById(Temp.Category.Id);
                 _unitOfWork.ProductRepository.Add(Temp);
                 _unitOfWork.SaveChanges();
+                Dialog.ShowSuccess("Added successfully");
                 Clear(obj);
             }
         }
 
         public void Delete(object obj)
         {
-            var get = _unitOfWork.ProductRepository.GetById(Select.Id);
-            if (get != null)
+            if (Dialog.ShowConfirm($"Are you sure you want to delete this table? (Id: {Select.Id})"))
             {
-                _unitOfWork.ProductRepository.Remove(get);
-                _unitOfWork.SaveChanges();
-                Clear(obj);
+
+                var get = _unitOfWork.ProductRepository.GetById(Select.Id);
+                if (get != null)
+                {
+                    _unitOfWork.ProductRepository.Remove(get);
+                    _unitOfWork.SaveChanges();
+                    Clear(obj);
+                }
             }
         }
 
@@ -142,29 +147,35 @@ namespace SE1802_PRN212_Group6.ViewModels.Admin
                 get.Image = ImageDialog != null
                     ? ImageUtil.UpdateImage(nameof(Product), Select.Image, ImageDialog)
                     : get.Image;
-
-                _unitOfWork.ProductRepository.Update(get);
-                _unitOfWork.SaveChanges();
-                Clear(obj);
+                if (get.TryValidate())
+                {
+                    _unitOfWork.ProductRepository.Update(get);
+                    _unitOfWork.SaveChanges();
+                    Dialog.ShowSuccess("Updated successfully");
+                    Clear(obj);
+                }
             }
         }
 
         public void Restore(object obj)
         {
-            var get = _unitOfWork.ProductRepository.GetById(Select.Id);
-            if (get != null)
+            if (Dialog.ShowConfirm($"Are you sure you want to restore this table? (Id: {Select.Id})"))
             {
-                _unitOfWork.ProductRepository.Restore(get);
-                _unitOfWork.SaveChanges();
-                Clear(obj);
+                var get = _unitOfWork.ProductRepository.GetById(Select.Id);
+                if (get != null)
+                {
+                    _unitOfWork.ProductRepository.Restore(get);
+                    _unitOfWork.SaveChanges();
+                    Clear(obj);
+                }
             }
         }
 
         public void Clear(object obj)
         {
-            if (obj is ListView listRoom)
+            if (obj is ListView listProduct)
             {
-                listRoom.UnselectAll();
+                listProduct.UnselectAll();
             }
             Products.Clear();
             Load();
