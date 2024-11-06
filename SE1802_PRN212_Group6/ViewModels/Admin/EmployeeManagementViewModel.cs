@@ -16,7 +16,6 @@ namespace SE1802_PRN212_Group6.ViewModels.Admin
     public class EmployeeManagementViewModel : BaseViewModel
     {
         public Models.User User { get; set; }
-        public IReadOnlyList<string> Types { get; set; }
         private OpenFileDialog? _imageDialog { get; set; }
         public OpenFileDialog? ImageDialog
         {
@@ -85,9 +84,7 @@ namespace SE1802_PRN212_Group6.ViewModels.Admin
 
         public EmployeeManagementViewModel(Models.User user)
         {
-            User = user ?? throw new ArgumentNullException(nameof(user)); // Ensure User is not null
-            Types = Enum.GetValues(typeof(TypeEnum)).Cast<TypeEnum>().Select(x => x.ToString()).ToList();
-
+            User = user ; 
             ClearCommand = new RelayCommand(Clear);
             AddCommand = new RelayCommand(Add);
             UpdateCommand = new RelayCommand(Update);
