@@ -1,16 +1,16 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-
+using SE1802_PRN212_Group6.Models; 
 namespace SE1802_PRN212_Group6.Views.Admin
 {
-    /// <summary>
-    /// Interaction logic for AdminWindow.xaml
-    /// </summary>
     public partial class AdminWindow : Window
     {
-        public AdminWindow()
+        private readonly Models.User _user;
+
+        public AdminWindow(Models.User user)
         {
             InitializeComponent();
+            _user = user; 
         }
 
         private void MenuItemToCheck(MenuItem itemToCheck)
@@ -24,7 +24,7 @@ namespace SE1802_PRN212_Group6.Views.Admin
 
         private void EmployeeM_Click(object sender, RoutedEventArgs e)
         {
-            MainFrame.Content = new EmployeeManagementPage();
+            MainFrame.Content = new EmployeeManagementPage(_user);
             MenuItemToCheck(EmployeeM);
         }
 

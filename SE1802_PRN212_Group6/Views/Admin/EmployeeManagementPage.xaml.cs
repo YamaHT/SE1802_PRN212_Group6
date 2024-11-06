@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using SE1802_PRN212_Group6.ViewModels.Admin;
 
 namespace SE1802_PRN212_Group6.Views.Admin
 {
@@ -20,9 +21,12 @@ namespace SE1802_PRN212_Group6.Views.Admin
     /// </summary>
     public partial class EmployeeManagementPage : Page
     {
-        public EmployeeManagementPage()
+        private Models.User User;
+        public EmployeeManagementPage(Models.User user)
         {
             InitializeComponent();
+            this.User = user;
+            this.DataContext = new EmployeeManagementViewModel(user);
         }
     }
 }
