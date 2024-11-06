@@ -70,19 +70,15 @@
             </ScrollViewer>
 
             <Grid Grid.Row="1">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
 
-                <Button Content="Clear" Command="{Binding ClearCommand}" CommandParameter="{Binding ElementName=list}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Background="#eee" Foreground="Red"/>
-                <Button Content="Update" Command="{Binding UpdateCommand}" CommandParameter="{Binding ElementName=list}" Grid.Row="1" Grid.Column="1" Background="DeepSkyBlue"/>
-                <Button Content="Delete" Command="{Binding DeleteCommand}" CommandParameter="{Binding ElementName=list}" Grid.Row="1" Grid.Column="0" Background="OrangeRed"/>
+                <Button Content="Clear" Command="{Binding ClearCommand}" CommandParameter="{Binding ElementName=list}" Grid.Row="0" Background="#eee" Foreground="Red"/>
+                <Button Content="Update" Command="{Binding UpdateCommand}" CommandParameter="{Binding ElementName=list}" Grid.Row="1" Background="DeepSkyBlue"/>
+                <Button Content="Delete" Command="{Binding DeleteCommand}" CommandParameter="{Binding ElementName=list}" Grid.Row="2" Background="OrangeRed"/>
             </Grid>
         </Grid>
     </Grid>

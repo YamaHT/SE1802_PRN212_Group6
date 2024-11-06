@@ -34,7 +34,7 @@
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
                     <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}"/>
-                    <GridViewColumn Header="Price" DisplayMemberBinding="{Binding Price}"/>
+                    <GridViewColumn Header="Price" DisplayMemberBinding="{Binding Price, Converter={StaticResource PriceConverter}}"/>
                     <GridViewColumn Header="Description" Width="140">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>

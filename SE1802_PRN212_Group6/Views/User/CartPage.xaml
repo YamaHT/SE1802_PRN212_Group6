@@ -44,7 +44,7 @@
                     <Button Grid.Column="2" Content="+" Command="{Binding PlusCommand}" FontSize="30" Background="Transparent" BorderThickness="0" Foreground="Green"/>
                 </Grid>
                 <Button Content="Clear" Command="{Binding ClearCommand}" CommandParameter="{Binding ElementName=list}" Background="#eee" Foreground="Red"/>
-                <Button Content="Update" Command="{Binding UpdateCommand}" CommandParameter="{Binding ElementName=list}" Background="ForestGreen"/>
+                <Button Content="Update" Command="{Binding UpdateCommand}" CommandParameter="{Binding ElementName=list}" Background="DeepSkyBlue"/>
                 <Button Content="Delete" Command="{Binding DeleteCommand}" CommandParameter="{Binding ElementName=list}" Background="OrangeRed"/>
             </StackPanel>
         </Grid>
@@ -70,7 +70,7 @@
                 </ComboBox.ItemTemplate>
             </ComboBox>
 
-            <Button Command="{Binding CheckoutCommand}" Margin="0 30" Content="Checkout" Background="DeepSkyBlue"/>
+            <Button Command="{Binding CheckoutCommand}" Margin="0 30" Content="Checkout" FontSize="20" Foreground="White" Background="ForestGreen"/>
         </StackPanel>
     </Grid>
 </Page>

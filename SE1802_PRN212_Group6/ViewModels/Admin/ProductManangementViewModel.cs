@@ -137,7 +137,7 @@ namespace SE1802_PRN212_Group6.ViewModels.Admin
 
         public void Update(object obj)
         {
-            var get = _unitOfWork.ProductRepository.GetById(Select.Id);
+            var get = _unitOfWork.ProductRepository.GetById(Select.Id, ["OrderDetails", "OrderDetails.Order"]);
             if (get != null)
             {
                 get.Name = Temp.Name;
@@ -148,6 +148,14 @@ namespace SE1802_PRN212_Group6.ViewModels.Admin
                 get.Image = ImageDialog != null
                     ? ImageUtil.UpdateImage(nameof(Product), Select.Image, ImageDialog)
                     : get.Image;
+
+                var orderDetailsInCartAssociatedWithProduct = get.OrderDetails.Where(x => x.Order!.OrderDate == null);
+                foreach (var orderDetail in orderDetailsInCartAssociatedWithProduct)
+                {
+                    orderDetail.SubTotal = orderDetail.SubQuantity * get.Price;
+                    _unitOfWork.OrderDetailRepository.Update(orderDetail);
+                }
+
                 if (get.TryValidate())
                 {
                     _unitOfWork.ProductRepository.Update(get);

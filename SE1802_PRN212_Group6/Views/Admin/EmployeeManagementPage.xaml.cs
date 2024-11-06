@@ -21,12 +21,10 @@ namespace SE1802_PRN212_Group6.Views.Admin
     /// </summary>
     public partial class EmployeeManagementPage : Page
     {
-        private Models.User User;
         public EmployeeManagementPage(Models.User user)
         {
             InitializeComponent();
-            this.User = user;
-            this.DataContext = new EmployeeManagementViewModel(user);
+            DataContext = new EmployeeManagementViewModel(user);
         }
     }
 }
