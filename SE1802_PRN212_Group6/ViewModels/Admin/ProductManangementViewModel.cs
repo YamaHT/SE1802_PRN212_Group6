@@ -129,6 +129,7 @@ namespace SE1802_PRN212_Group6.ViewModels.Admin
                 {
                     _unitOfWork.ProductRepository.Remove(get);
                     _unitOfWork.SaveChanges();
+                    Dialog.ShowSuccess("Deleted successfully");
                     Clear(obj);
                 }
             }
@@ -166,6 +167,7 @@ namespace SE1802_PRN212_Group6.ViewModels.Admin
                 {
                     _unitOfWork.ProductRepository.Restore(get);
                     _unitOfWork.SaveChanges();
+                    Dialog.ShowSuccess("Restored successfully");
                     Clear(obj);
                 }
             }
