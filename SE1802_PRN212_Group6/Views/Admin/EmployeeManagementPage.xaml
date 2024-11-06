@@ -4,11 +4,127 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:SE1802_PRN212_Group6.Views.Admin"
+      xmlns:vm="clr-namespace:SE1802_PRN212_Group6.ViewModels.Admin"
+      xmlns:co="clr-namespace:SE1802_PRN212_Group6.Utils.Converters"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
+      Background="White"
       Title="EmployeeManagementPage">
+    <Page.DataContext>
+        <vm:EmployeeManagementViewModel></vm:EmployeeManagementViewModel>
+    </Page.DataContext>
+    <Page.Resources>
+        <co:GenderConverter x:Key="GenderConverter" />
+    </Page.Resources>
 
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="6*"/>
+            <ColumnDefinition Width="4*"/>
+        </Grid.ColumnDefinitions>
+        <ListView x:Name="list" Grid.Column="0" ItemsSource="{Binding Employees}" SelectedItem="{Binding Select}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Image">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image Width="40" Height="40" Source="{Binding Image, Converter={StaticResource ImageConverter}, ConverterParameter=Employee}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+
+                    <GridViewColumn Header="FullName">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock  TextAlignment="Right" Text="{Binding FullName}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="IdentificationCard">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock TextAlignment="Right" Text="{Binding IdentificationCard}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Phone">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock TextAlignment="Right" Text="{Binding Phone}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                    <GridViewColumn Header="Birthday">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock TextAlignment="Right" Text="{Binding Birthday}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Gender">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock TextAlignment="Right" Text="{Binding Gender, Converter={StaticResource GenderConverter}}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Salary">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock TextAlignment="Right" Text="{Binding Salary}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="7*"/>
+                <RowDefinition Height="3*"/>
+            </Grid.RowDefinitions>
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <StackPanel Margin="20 0">
+                    <Label Content="FullName" />
+                    <TextBox Text="{Binding Temp.FullName, Mode=TwoWay}" />
+
+                    <Label Content="IdentificationCard" />
+                    <TextBox Text="{Binding Temp.IdentificationCard, Mode=TwoWay}" />
+
+                    <Label Content="Phone" />
+                    <TextBox Text="{Binding Temp.Phone, Mode=TwoWay}" />
+
+                    <Label Content="Brithday (mm/dd/yyyy)"/>
+                    <DatePicker x:Name="BirthdayDatePicker" Text="{Binding Temp.Birthday, Mode=TwoWay}"  />
+
+                    <Label Content="Gender" />
+                    <CheckBox Content="Female" IsChecked="{Binding Temp.Gender, Mode=TwoWay}" Margin=" 20 2 02 2" />
+
+                    <Label Content="Salary" />
+                    <TextBox Text="{Binding Temp.Salary, Mode=TwoWay}" />
+                    <Label Content="Image" />
+                    <Image Height="50 " Source="{Binding Temp.Image, Converter={StaticResource ImageConverter}, ConverterParameter=Employee}"/>
+                    <Button Content="Choose Image" Command="{Binding ChooseImageCommand}"/>
+                    <Image Height="100" Stretch="Uniform" StretchDirection="DownOnly" Source="{Binding ImageDialog.FileName}" />
+                </StackPanel>
+            </ScrollViewer>
+            <Grid Grid.Row="1" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Button Content="Clear" Command="{Binding ClearCommand}" CommandParameter="{Binding ElementName=list}" Grid.Row="0" Grid.Column="1" Background="#eee" Foreground="Red" Margin="2,2,0,2"/>
+                <Button Content="Add" Command="{Binding AddCommand}" CommandParameter="{Binding ElementName=list}" Grid.Row="0" Grid.Column="0" Background="ForestGreen"  Margin="2,2,2,2"/>
+                <Button Content="Update" Command="{Binding UpdateCommand}" CommandParameter="{Binding ElementName=list}" Grid.Row="1" Grid.Column="1" Background="DeepSkyBlue"  Margin="2,2,2,2"/>
+                <Button Content="Delete" Command="{Binding DeleteCommand}" CommandParameter="{Binding ElementName=list}" Grid.Row="1" Grid.Column="0" Background="OrangeRed" Margin="2,2,2,2"/>
+            </Grid>
+        </Grid>
     </Grid>
 </Page>
