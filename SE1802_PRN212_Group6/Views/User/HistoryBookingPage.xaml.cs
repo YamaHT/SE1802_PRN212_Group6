@@ -24,8 +24,6 @@ namespace SE1802_PRN212_Group6.Views.User
         public HistoryBookingPage(Models.User user)
         {
             InitializeComponent();
-            DataContext = new Table_BookingViewModel(user);
-
         }
     }
 }

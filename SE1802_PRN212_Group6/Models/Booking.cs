@@ -19,9 +19,11 @@ namespace SE1802_PRN212_Group6.Models
         [MaxLength(1000, ErrorMessage = "Note can't exceed 1000 characters")]
         public string? Note { get; set; }
 
-        public DateOnly BookingDate { get; set; }
-        
-        public TimeOnly ArrivalTime { get; set; }
+        [Required(ErrorMessage = "Bookingdate is required")]
+        public DateOnly? BookingDate { get; set; } = null;
+
+        [Required(ErrorMessage = "ArrivalTime is required")]
+        public TimeOnly? ArrivalTime { get; set; } = null;
 
         [Range(1, int.MaxValue, ErrorMessage = "People must be greater than 0")]
         public int NumberOfPeople { get; set; }

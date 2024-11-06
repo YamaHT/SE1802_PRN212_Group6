@@ -16,9 +16,6 @@ using System.Windows.Shapes;
 
 namespace SE1802_PRN212_Group6.Views.User
 {
-    /// <summary>
-    /// Interaction logic for TableListPage.xaml
-    /// </summary>
     public partial class TableListPage : Page
     {
         public TableListPage(Models.User user)
@@ -31,5 +28,10 @@ namespace SE1802_PRN212_Group6.Views.User
             bookingDatePicker.BlackoutDates.Add(new CalendarDateRange(DateTime.MinValue, DateTime.Now.AddDays(-1)));
         }
 
+        private void bookingDatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var viewModel = DataContext as Table_BookingViewModel;
+            viewModel?.OnDateChangeCommand.Execute(bookingDatePicker.SelectedDate);
+        }
     }
 }
