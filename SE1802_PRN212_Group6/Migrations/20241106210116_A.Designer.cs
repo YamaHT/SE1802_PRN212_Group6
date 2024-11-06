@@ -12,7 +12,7 @@ using SE1802_PRN212_Group6.Data;
 namespace SE1802_PRN212_Group6.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241106183247_A")]
+    [Migration("20241106210116_A")]
     partial class A
     {
         /// <inheritdoc />
@@ -33,10 +33,12 @@ namespace SE1802_PRN212_Group6.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<TimeOnly>("ArrivalTime")
+                    b.Property<TimeOnly?>("ArrivalTime")
+                        .IsRequired()
                         .HasColumnType("time");
 
-                    b.Property<DateOnly>("BookingDate")
+                    b.Property<DateOnly?>("BookingDate")
+                        .IsRequired()
                         .HasColumnType("date");
 
                     b.Property<string>("FullName")
