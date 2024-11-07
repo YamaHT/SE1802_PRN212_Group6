@@ -71,8 +71,8 @@ namespace SE1802_PRN212_Group6.ViewModels.User
             CheckoutInfoDTO = new();
             Load();
 
-            MinusCommand = new RelayCommand(Minus, (object obj) => Select.ProductId != 0);
-            PlusCommand = new RelayCommand(Plus, (object obj) => Select.ProductId != 0);
+            MinusCommand = new RelayCommand(Minus, (object obj) => Select != null && Select.ProductId != 0);
+            PlusCommand = new RelayCommand(Plus, (object obj) => Select != null && Select.ProductId != 0);
             ClearCommand = new RelayCommand(Clear);
             UpdateCommand = new RelayCommand(Update);
             DeleteCommand = new RelayCommand(Delete);
